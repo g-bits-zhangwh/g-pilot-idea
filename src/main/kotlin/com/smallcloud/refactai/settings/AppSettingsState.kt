@@ -28,12 +28,12 @@ import com.smallcloud.refactai.account.AccountManager.Companion.instance as Acco
 class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var apiKey: String? = null
     var temperature: Float? = null
-    var model: String? = null
+    var model: String? = "deepseek-coder-1.3b"
     var userLoggedIn: String? = null
     var streamlinedLoginTicket: String? = null
     var streamlinedLoginTicketWasCreatedTs: Long? = null
     var inferenceUri: String? = null
-    var userInferenceUri: String? = null
+    var userInferenceUri: String? = "http://172.20.158.92:8010/"
     var loginMessage: String? = null
     var tooltipMessage: String? = null
     var inferenceMessage: String? = null
@@ -43,7 +43,7 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var xDebugLSPPort: Int? = null
     var stagingVersion: String = ""
     var rateUsNotification: Boolean = false
-    var astIsEnabled: Boolean = true
+    var astIsEnabled: Boolean = false
     var astIsEnabledDefaultChanged: Boolean = false
     var vecdbIsEnabled: Boolean = false
     var vecdbIsEnabledDefaultChanged: Boolean = false
@@ -52,6 +52,9 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var astLightMode: Boolean = false
     var completionMaxTokens: Int = 0
     var insecureSSL: Boolean = false
+    var enableAutoSuggest: Boolean = true
+    var agreeCodeCollect: Boolean = true
+    var completeDisplayThreshold: String = "3"
     var telemetrySnippetsEnabled: Boolean = false
     var isFirstStart: Boolean = true
 
@@ -123,8 +126,14 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
                         instance.xDebugLSPPort = newPort
                     }
 
-                    override fun insecureSSLChanged(newValue: Boolean) {
-                        instance.insecureSSL = newValue
+                    override fun enableAutoSuggestChanged(newValue: Boolean) {
+                        instance.enableAutoSuggest = newValue
+                    }
+                    override fun agreeCodeCollectChanged(newValue: Boolean) {
+                        instance.agreeCodeCollect = newValue
+                    }
+                    override fun completeDisplayThresholdChanged(newValue: String)  {
+                        instance.completeDisplayThreshold = newValue
                     }
                     override fun completionMaxTokensChanged(newMaxTokens: Int) {
                         instance.completionMaxTokens = newMaxTokens

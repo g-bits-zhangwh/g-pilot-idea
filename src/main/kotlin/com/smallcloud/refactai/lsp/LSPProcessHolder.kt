@@ -140,11 +140,11 @@ class LSPProcessHolder(val project: Project) : Disposable {
                     }
                 }
 
-                override fun insecureSSLChanged(newValue: Boolean) {
-                    AppExecutorUtil.getAppScheduledExecutorService().submit {
-                        settingsChanged()
-                    }
-                }
+//                override fun insecureSSLChanged(newValue: Boolean) {
+//                    AppExecutorUtil.getAppScheduledExecutorService().submit {
+//                        settingsChanged()
+//                    }
+//                }
             })
 
         Companion::class.java.getResourceAsStream(

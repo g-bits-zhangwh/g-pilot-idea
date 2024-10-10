@@ -35,7 +35,7 @@ repositories {
 intellij {
 //    version.set("LATEST-EAP-SNAPSHOT")
     version.set("2023.1.6")
-    type.set("PC") // Target IDE Platform
+    type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(
         "Git4Idea",

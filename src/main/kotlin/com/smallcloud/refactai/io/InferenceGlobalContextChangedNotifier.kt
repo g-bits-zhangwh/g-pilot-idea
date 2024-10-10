@@ -19,7 +19,9 @@ interface InferenceGlobalContextChangedNotifier {
     fun vecdbFlagChanged(newValue: Boolean) {}
     fun vecdbFileLimitChanged(newValue: Int) {}
     fun xDebugLSPPortChanged(newPort: Int?) {}
-    fun insecureSSLChanged(newValue: Boolean) {}
+    fun enableAutoSuggestChanged(newValue: Boolean) {}
+    fun agreeCodeCollectChanged(newValue: Boolean) {}
+    fun completeDisplayThresholdChanged(newValue: String) {}
     fun completionMaxTokensChanged(newMaxTokens: Int) {}
     fun telemetrySnippetsEnabledChanged(newValue: Boolean) {}
 

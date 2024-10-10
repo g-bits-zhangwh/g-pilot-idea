@@ -50,7 +50,9 @@ class AppSettingsComponent {
     private val myAstFileLimitText = JBTextField()
     private val myAstLightMode = JCheckBox(RefactAIBundle.message("advancedSettings.useASTLightMode"))
     private val myVecdbFileLimitText = JBTextField()
-    private val insecureSSLCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.insecureSSL"))
+    private val enableAutoSuggestCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.enableAutoSuggest"))
+    private val agreeCodeCollectCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.agreeCodeCollect"))
+    private val completeDisplayThresholdText = JBTextField()
     private val telemetrySnippetCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.telemetryCodeSnippets"))
     private val pauseCompletionCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.pauseCompletion"))
     private val completionMaxTokenText = JBTextField()
@@ -74,7 +76,7 @@ class AppSettingsComponent {
     }
 
     val vecdbCheckbox = JCheckBox(RefactAIBundle.message("advancedSettings.useVecDB")).apply {
-        isVisible = true
+        isVisible = false
     }
 
     val openCustomizationButton = JButton("Open Customization").apply {
@@ -101,44 +103,65 @@ class AppSettingsComponent {
 
     init {
         mainPanel = FormBuilder.createFormBuilder().run {
-            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.inferenceURL")}: "),
-                myContrastUrlText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
-            addComponentToRightColumn(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.inferenceURLDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ), 0
-            )
-            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.secretApiKey")}: "),
-                myTokenText, 1, false)
+//            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.inferenceURL")}: "),
+//                myContrastUrlText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+//            addComponentToRightColumn(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.inferenceURLDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ), 0
+//            )
+//            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.secretApiKey")}: "),
+//                myTokenText, 1, false)
 
-            addComponent(insecureSSLCheckBox, UIUtil.LARGE_VGAP)
+            addComponent(enableAutoSuggestCheckBox, UIUtil.LARGE_VGAP)
             addComponent(
                 JBLabel(
-                    RefactAIBundle.message("advancedSettings.insecureSSLDesc"),
+                    "是否启用自动补全功能",
                     UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
                 ).apply {
                     setCopyable(true)
                 }, 0
             )
 
-            addLabeledComponent(JBLabel(RefactAIBundle.message("advancedSettings.completionMaxTokens")),
-                completionMaxTokenText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+            addComponent(agreeCodeCollectCheckBox, UIUtil.LARGE_VGAP)
             addComponent(
                 JBLabel(
-                    RefactAIBundle.message("advancedSettings.completionMaxTokensDesc"),
+                    "是否同意进行代码数据收集（收集的匿名数据）",
                     UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ), 0
+                ).apply {
+                    setCopyable(true)
+                }, 0
             )
 
-            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.codeCompletionModel")}: "),
-                myModelText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.completeDisplayThreshold")}: "),
+               completeDisplayThresholdText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
             addComponent(
                 JBLabel(
-                    RefactAIBundle.message("advancedSettings.codeCompletionModelDesc"),
+                    "代码补全推荐显示阈值（默认值是3。范围是0到正无穷。数值越则小判断越严格，显示的代码补全推荐越少，显示的代码补全推荐质量越高。设置为空则代表正无穷，代表不进行阈值判断，所有补全推荐都会显示出来）",
                     UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ), 0
+                ).apply {
+                    setCopyable(true)
+                }, 0
             )
+
+//            addLabeledComponent(JBLabel(RefactAIBundle.message("advancedSettings.completionMaxTokens")),
+//                completionMaxTokenText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.completionMaxTokensDesc"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ), 0
+//            )
+
+//            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.codeCompletionModel")}: "),
+//                myModelText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.codeCompletionModelDesc"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ), 0
+//            )
 
 //            addComponent(telemetrySnippetCheckBox, UIUtil.LARGE_VGAP)
 //            addComponent(
@@ -149,64 +172,64 @@ class AppSettingsComponent {
 //                    setCopyable(true)
 //                }, 0
 //            )
-            addComponent(pauseCompletionCheckBox, UIUtil.LARGE_VGAP)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.pauseCompletionDesc"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ).apply {
-                    setCopyable(true)
-                }, 0
-            )
-            addComponent(astCheckbox, UIUtil.LARGE_VGAP)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.useMultipleFilesCompletionDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ).apply {
-                    setCopyable(true)
-                }, 0
-            )
-            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.astFileLimit")}: "), myAstFileLimitText,
-                (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.astFileLimitDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ), 0
-            )
-            addComponent(myAstLightMode, UIUtil.LARGE_VGAP)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.useASTLightModeDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ).apply {
-                    setCopyable(true)
-                }, 0
-            )
+//            addComponent(pauseCompletionCheckBox, UIUtil.LARGE_VGAP)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.pauseCompletionDesc"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ).apply {
+//                    setCopyable(true)
+//                }, 0
+//            )
+//            addComponent(astCheckbox, UIUtil.LARGE_VGAP)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.useMultipleFilesCompletionDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ).apply {
+//                    setCopyable(true)
+//                }, 0
+//            )
+//            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.astFileLimit")}: "), myAstFileLimitText,
+//                (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.astFileLimitDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ), 0
+//            )
+//            addComponent(myAstLightMode, UIUtil.LARGE_VGAP)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.useASTLightModeDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ).apply {
+//                    setCopyable(true)
+//                }, 0
+//            )
 
-            addComponent(vecdbCheckbox, UIUtil.LARGE_VGAP)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.useVecDBDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ).apply {
-                    setCopyable(true)
-                }, 0
-            )
-            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.vecDBFileLimit")}: "), myVecdbFileLimitText)
-            addComponent(
-                JBLabel(
-                    RefactAIBundle.message("advancedSettings.vecDBFileLimitDescription"),
-                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
-                ).apply {
-                    setCopyable(true)
-                }, 0
-            )
+//            addComponent(vecdbCheckbox, UIUtil.LARGE_VGAP)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.useVecDBDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ).apply {
+//                    setCopyable(true)
+//                }, 0
+//            )
+//            addLabeledComponent(JBLabel("${RefactAIBundle.message("advancedSettings.vecDBFileLimit")}: "), myVecdbFileLimitText)
+//            addComponent(
+//                JBLabel(
+//                    RefactAIBundle.message("advancedSettings.vecDBFileLimitDescription"),
+//                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+//                ).apply {
+//                    setCopyable(true)
+//                }, 0
+//            )
 
-            addLabeledComponent(JBLabel("Customization").apply {
-                isVisible = openCustomizationButton.isVisible
-            }, openCustomizationButton, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
+//            addLabeledComponent(JBLabel("Customization").apply {
+//                isVisible = openCustomizationButton.isVisible
+//            }, openCustomizationButton, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
 
             addComponentFillVertically(JPanel(), 0)
         }.panel
@@ -278,10 +301,22 @@ class AppSettingsComponent {
             myModelText.text = newVal
         }
 
-    var insecureSSL: Boolean
-        get() = insecureSSLCheckBox.isSelected
+    var enableAutoSuggest: Boolean
+        get() = enableAutoSuggestCheckBox.isSelected
         set(newVal) {
-            insecureSSLCheckBox.isSelected = newVal
+            enableAutoSuggestCheckBox.isSelected = newVal
+        }
+
+    var agreeCodeCollect: Boolean
+        get() = agreeCodeCollectCheckBox.isSelected
+        set(newVal) {
+            agreeCodeCollectCheckBox.isSelected = newVal
+        }
+
+    var completeDisplayThreshold: String
+        get() = completeDisplayThresholdText.text
+        set(newVal) {
+            completeDisplayThresholdText.text = newVal
         }
 
     var completionMaxTokens: Int

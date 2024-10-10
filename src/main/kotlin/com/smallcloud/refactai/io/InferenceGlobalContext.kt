@@ -186,10 +186,34 @@ class InferenceGlobalContext : Disposable {
     var insecureSSL: Boolean
         get() = AppSettingsState.insecureSSL
         set(newValue) {
-            if (newValue == insecureSSL) return
+
+        }
+
+    var enableAutoSuggest: Boolean
+        get() = AppSettingsState.enableAutoSuggest
+        set(newValue) {
+            if (newValue == enableAutoSuggest) return
             messageBus
                .syncPublisher(InferenceGlobalContextChangedNotifier.TOPIC)
-               .insecureSSLChanged(newValue)
+               .enableAutoSuggestChanged(newValue)
+        }
+
+    var agreeCodeCollect: Boolean
+        get() = AppSettingsState.agreeCodeCollect
+        set(newValue) {
+            if (newValue == agreeCodeCollect) return
+            messageBus
+               .syncPublisher(InferenceGlobalContextChangedNotifier.TOPIC)
+               .agreeCodeCollectChanged(newValue)
+        }
+
+    var completeDisplayThreshold: String
+        get() = AppSettingsState.completeDisplayThreshold
+        set(newValue) {
+            if (newValue == completeDisplayThreshold) return
+            messageBus
+               .syncPublisher(InferenceGlobalContextChangedNotifier.TOPIC)
+               .completeDisplayThresholdChanged(newValue)
         }
 
     var completionMaxTokens: Int

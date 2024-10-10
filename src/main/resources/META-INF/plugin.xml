@@ -119,7 +119,7 @@ integrated into a single package that follows your privacy settings.</p>
         <applicationConfigurable parentId="tools"
                                  instance="com.smallcloud.refactai.settings.AppSettingsConfigurable"
                                  id="refactai_advanced_settings"
-                                 displayName="Refact.ai"/>
+                                 displayName="G-pilot"/>
         <errorHandler implementation="com.smallcloud.refactai.PluginErrorReportSubmitter"/>
 
         <actionPromoter implementation="com.smallcloud.refactai.listeners.InlineActionsPromoter"/>
@@ -161,24 +161,24 @@ integrated into a single package that follows your privacy settings.</p>
                 id="ForceCompletionAction"
                 text="Run Code Completion Manually"
                 description="Refact AI Make A Manual Trigger Completion">
-            <keyboard-shortcut first-keystroke="alt SLASH" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="ctrl shift SPACE" keymap="$default"/>
         </action>
-        <group id="RefactAIPrivacy" popup="true" class="com.smallcloud.refactai.privacy.RefactAIPrivacyGroupAction">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-        </group>
+<!--        <group id="RefactAIPrivacy" popup="true" class="com.smallcloud.refactai.privacy.RefactAIPrivacyGroupAction">-->
+<!--            <add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
+<!--            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>-->
+<!--            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
+<!--        </group>-->
 <!--        For display shortcut on the pane, action must be with mask "Activate${id.filterNot { it.isWhitespace() }}ToolWindow"-->
-        <action id="ActivateRefactChatToolWindow"
-                text="Open Chat"
-                class="com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeAction">
-            <keyboard-shortcut first-keystroke="F1" keymap="$default"/>
-        </action>
+<!--        <action id="ActivateRefactChatToolWindow"-->
+<!--                text="Open Chat"-->
+<!--                class="com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeAction">-->
+<!--            <keyboard-shortcut first-keystroke="F1" keymap="$default"/>-->
+<!--        </action>-->
 
-        <group id="RefactAIChatGroup">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <separator/>
-        </group>
+<!--        <group id="RefactAIChatGroup">-->
+<!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
+<!--            <separator/>-->
+<!--        </group>-->
     </actions>
     <resource-bundle>bundles.RefactAI</resource-bundle>
     <applicationListeners>

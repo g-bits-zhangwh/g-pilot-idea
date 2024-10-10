@@ -43,73 +43,79 @@ class AppSettingsConfigurable : Configurable {
     }
 
     override fun isModified(): Boolean {
-        var modified =
-            (mySettingsComponent!!.tokenText.isNotEmpty() && (AccountManager.apiKey == null ||
-                mySettingsComponent!!.tokenText.trim() != AccountManager.apiKey))
-        modified = modified || (mySettingsComponent!!.tokenText.isEmpty() && AccountManager.apiKey != null)
+//         var modified =
+//             (mySettingsComponent!!.tokenText.isNotEmpty() && (AccountManager.apiKey == null ||
+//                 mySettingsComponent!!.tokenText.trim() != AccountManager.apiKey))
+//         modified = modified || (mySettingsComponent!!.tokenText.isEmpty() && AccountManager.apiKey != null)
 
-        modified =
-            modified || (mySettingsComponent!!.contrastUrlText.isNotEmpty() &&
-                mySettingsComponent!!.contrastUrlText != InferenceGlobalContext.inferenceUri)
-        modified =
-            modified || (mySettingsComponent!!.contrastUrlText.isEmpty() && !InferenceGlobalContext.isCloud)
+//        modified =
+//            modified || (mySettingsComponent!!.contrastUrlText.isNotEmpty() &&
+//                mySettingsComponent!!.contrastUrlText != InferenceGlobalContext.inferenceUri)
+//        modified =
+//            modified || (mySettingsComponent!!.contrastUrlText.isEmpty() && !InferenceGlobalContext.isCloud)
 
-        modified = modified || mySettingsComponent!!.useDeveloperMode != InferenceGlobalContext.developerModeEnabled
-
-        modified = modified || mySettingsComponent!!.xDebugLSPPort != InferenceGlobalContext.xDebugLSPPort
-
-        modified = modified || mySettingsComponent!!.stagingVersion != InferenceGlobalContext.stagingVersion
-
-        modified = modified || mySettingsComponent!!.astIsEnabled != InferenceGlobalContext.astIsEnabled
-        modified = modified || mySettingsComponent!!.astFileLimit != InferenceGlobalContext.astFileLimit
-        modified = modified || mySettingsComponent!!.astLightMode != InferenceGlobalContext.astLightMode
-        modified = modified || mySettingsComponent!!.vecdbIsEnabled != InferenceGlobalContext.vecdbIsEnabled
-        modified = modified || mySettingsComponent!!.vecdbFileLimit != InferenceGlobalContext.vecdbFileLimit
-
-        modified =
-            modified || mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null } != InferenceGlobalContext.model
-        modified = modified || mySettingsComponent!!.insecureSSL != InferenceGlobalContext.insecureSSL
-        modified = modified || mySettingsComponent!!.completionMaxTokens!= InferenceGlobalContext.completionMaxTokens
-        modified = modified || mySettingsComponent!!.telemetrySnippetsEnabled != InferenceGlobalContext.telemetrySnippetsEnabled
-        modified = modified || mySettingsComponent!!.pauseCompletion != !InferenceGlobalContext.useAutoCompletion
+//         modified = modified || mySettingsComponent!!.useDeveloperMode != InferenceGlobalContext.developerModeEnabled
+//
+//         modified = modified || mySettingsComponent!!.xDebugLSPPort != InferenceGlobalContext.xDebugLSPPort
+//
+//         modified = modified || mySettingsComponent!!.stagingVersion != InferenceGlobalContext.stagingVersion
+//
+//         modified = modified || mySettingsComponent!!.astIsEnabled != InferenceGlobalContext.astIsEnabled
+//         modified = modified || mySettingsComponent!!.astFileLimit != InferenceGlobalContext.astFileLimit
+//         modified = modified || mySettingsComponent!!.astLightMode != InferenceGlobalContext.astLightMode
+//         modified = modified || mySettingsComponent!!.vecdbIsEnabled != InferenceGlobalContext.vecdbIsEnabled
+//         modified = modified || mySettingsComponent!!.vecdbFileLimit != InferenceGlobalContext.vecdbFileLimit
+//
+//         modified =
+//             modified || mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null } != InferenceGlobalContext.model
+        var modified = modified || mySettingsComponent!!.enableAutoSuggest != InferenceGlobalContext.enableAutoSuggest
+        modified = modified || mySettingsComponent!!.agreeCodeCollect != InferenceGlobalContext.agreeCodeCollect
+        modified = modified || mySettingsComponent!!.completeDisplayThreshold != InferenceGlobalContext.completeDisplayThreshold
+//         modified = modified || mySettingsComponent!!.completionMaxTokens!= InferenceGlobalContext.completionMaxTokens
+//         modified = modified || mySettingsComponent!!.telemetrySnippetsEnabled != InferenceGlobalContext.telemetrySnippetsEnabled
+//         modified = modified || mySettingsComponent!!.pauseCompletion != !InferenceGlobalContext.useAutoCompletion
         return modified
     }
 
     override fun apply() {
-        AccountManager.apiKey = mySettingsComponent!!.tokenText.trim().ifEmpty { null }
-        InferenceGlobalContext.inferenceUri = mySettingsComponent!!.contrastUrlText.ifEmpty { null }
-        mySettingsComponent!!.contrastUrlText = InferenceGlobalContext.inferenceUri ?: ""
-        InferenceGlobalContext.developerModeEnabled = mySettingsComponent!!.useDeveloperMode
-        InferenceGlobalContext.stagingVersion = mySettingsComponent!!.stagingVersion
-        InferenceGlobalContext.xDebugLSPPort = mySettingsComponent!!.xDebugLSPPort
-        InferenceGlobalContext.astIsEnabled = mySettingsComponent!!.astIsEnabled
-        InferenceGlobalContext.astFileLimit = mySettingsComponent!!.astFileLimit
-        InferenceGlobalContext.astLightMode = mySettingsComponent!!.astLightMode
-        InferenceGlobalContext.vecdbIsEnabled = mySettingsComponent!!.vecdbIsEnabled
-        InferenceGlobalContext.vecdbFileLimit = mySettingsComponent!!.vecdbFileLimit
-        InferenceGlobalContext.insecureSSL = mySettingsComponent!!.insecureSSL
-        InferenceGlobalContext.completionMaxTokens = mySettingsComponent!!.completionMaxTokens
-        InferenceGlobalContext.telemetrySnippetsEnabled = mySettingsComponent!!.telemetrySnippetsEnabled
-        InferenceGlobalContext.useAutoCompletion = !mySettingsComponent!!.pauseCompletion
-        InferenceGlobalContext.model = mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null }
+//         AccountManager.apiKey = mySettingsComponent!!.tokenText.trim().ifEmpty { null }
+//        InferenceGlobalContext.inferenceUri = mySettingsComponent!!.contrastUrlText.ifEmpty { null }
+//        mySettingsComponent!!.contrastUrlText = InferenceGlobalContext.inferenceUri ?: ""
+//         InferenceGlobalContext.developerModeEnabled = mySettingsComponent!!.useDeveloperMode
+//         InferenceGlobalContext.stagingVersion = mySettingsComponent!!.stagingVersion
+//         InferenceGlobalContext.xDebugLSPPort = mySettingsComponent!!.xDebugLSPPort
+//         InferenceGlobalContext.astIsEnabled = mySettingsComponent!!.astIsEnabled
+//         InferenceGlobalContext.astFileLimit = mySettingsComponent!!.astFileLimit
+//         InferenceGlobalContext.astLightMode = mySettingsComponent!!.astLightMode
+//         InferenceGlobalContext.vecdbIsEnabled = mySettingsComponent!!.vecdbIsEnabled
+//         InferenceGlobalContext.vecdbFileLimit = mySettingsComponent!!.vecdbFileLimit
+        InferenceGlobalContext.enableAutoSuggest = mySettingsComponent!!.enableAutoSuggest
+        InferenceGlobalContext.agreeCodeCollect = mySettingsComponent!!.agreeCodeCollect
+        InferenceGlobalContext.completeDisplayThreshold = mySettingsComponent!!.completeDisplayThreshold
+//         InferenceGlobalContext.completionMaxTokens = mySettingsComponent!!.completionMaxTokens
+//         InferenceGlobalContext.telemetrySnippetsEnabled = mySettingsComponent!!.telemetrySnippetsEnabled
+//         InferenceGlobalContext.useAutoCompletion = !mySettingsComponent!!.pauseCompletion
+//         InferenceGlobalContext.model = mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null }
     }
 
     override fun reset() {
-        mySettingsComponent!!.tokenText = AccountManager.apiKey ?: ""
-        mySettingsComponent!!.contrastUrlText = InferenceGlobalContext.inferenceUri ?: ""
-        mySettingsComponent!!.useDeveloperMode = InferenceGlobalContext.developerModeEnabled
-        mySettingsComponent!!.stagingVersion = InferenceGlobalContext.stagingVersion
-        mySettingsComponent!!.xDebugLSPPort = InferenceGlobalContext.xDebugLSPPort
-        mySettingsComponent!!.astIsEnabled = InferenceGlobalContext.astIsEnabled
-        mySettingsComponent!!.astFileLimit = InferenceGlobalContext.astFileLimit
-        mySettingsComponent!!.astLightMode = InferenceGlobalContext.astLightMode
-        mySettingsComponent!!.vecdbIsEnabled = InferenceGlobalContext.vecdbIsEnabled
-        mySettingsComponent!!.vecdbFileLimit = InferenceGlobalContext.vecdbFileLimit
-        mySettingsComponent!!.inferenceModel = InferenceGlobalContext.model
-        mySettingsComponent!!.insecureSSL = InferenceGlobalContext.insecureSSL
-        mySettingsComponent!!.completionMaxTokens = InferenceGlobalContext.completionMaxTokens
-        mySettingsComponent!!.telemetrySnippetsEnabled = InferenceGlobalContext.telemetrySnippetsEnabled
-        mySettingsComponent!!.pauseCompletion = !InferenceGlobalContext.useAutoCompletion
+//         mySettingsComponent!!.tokenText = AccountManager.apiKey ?: ""
+//        mySettingsComponent!!.contrastUrlText = InferenceGlobalContext.inferenceUri ?: ""
+//         mySettingsComponent!!.useDeveloperMode = InferenceGlobalContext.developerModeEnabled
+//         mySettingsComponent!!.stagingVersion = InferenceGlobalContext.stagingVersion
+//         mySettingsComponent!!.xDebugLSPPort = InferenceGlobalContext.xDebugLSPPort
+//         mySettingsComponent!!.astIsEnabled = InferenceGlobalContext.astIsEnabled
+//         mySettingsComponent!!.astFileLimit = InferenceGlobalContext.astFileLimit
+//         mySettingsComponent!!.astLightMode = InferenceGlobalContext.astLightMode
+//         mySettingsComponent!!.vecdbIsEnabled = InferenceGlobalContext.vecdbIsEnabled
+//         mySettingsComponent!!.vecdbFileLimit = InferenceGlobalContext.vecdbFileLimit
+//         mySettingsComponent!!.inferenceModel = InferenceGlobalContext.model
+        mySettingsComponent!!.enableAutoSuggest = InferenceGlobalContext.enableAutoSuggest
+        mySettingsComponent!!.agreeCodeCollect = InferenceGlobalContext.agreeCodeCollect
+        mySettingsComponent!!.completeDisplayThreshold = InferenceGlobalContext.completeDisplayThreshold
+//         mySettingsComponent!!.completionMaxTokens = InferenceGlobalContext.completionMaxTokens
+//         mySettingsComponent!!.telemetrySnippetsEnabled = InferenceGlobalContext.telemetrySnippetsEnabled
+//         mySettingsComponent!!.pauseCompletion = !InferenceGlobalContext.useAutoCompletion
     }
 
     override fun disposeUIResources() {
