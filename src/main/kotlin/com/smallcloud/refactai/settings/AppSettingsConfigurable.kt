@@ -68,7 +68,7 @@ class AppSettingsConfigurable : Configurable {
 //
 //         modified =
 //             modified || mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null } != InferenceGlobalContext.model
-        var modified = modified || mySettingsComponent!!.enableAutoSuggest != InferenceGlobalContext.enableAutoSuggest
+        var modified = mySettingsComponent!!.enableAutoSuggest != InferenceGlobalContext.enableAutoSuggest
         modified = modified || mySettingsComponent!!.agreeCodeCollect != InferenceGlobalContext.agreeCodeCollect
         modified = modified || mySettingsComponent!!.completeDisplayThreshold != InferenceGlobalContext.completeDisplayThreshold
 //         modified = modified || mySettingsComponent!!.completionMaxTokens!= InferenceGlobalContext.completionMaxTokens
