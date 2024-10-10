@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 import com.smallcloud.refactai.account.AccountManager.Companion.instance as AccountManager
 import com.smallcloud.refactai.io.InferenceGlobalContext.Companion.instance as InferenceGlobalContext
+import com.intellij.openapi.ui.Messages
 
 /**
  * Provides controller functionality for application settings.
@@ -78,6 +79,16 @@ class AppSettingsConfigurable : Configurable {
     }
 
     override fun apply() {
+        // 获取 completeDisplayThreshold
+        val threshold = mySettingsComponent!!.completeDisplayThreshold
+
+        // 检查 threshold 是否为空或非正数
+        if (!threshold.matches(Regex("([1-9]\\d*|0)(\\.\\d+)?$")) && threshold != "") {
+            mySettingsComponent!!.completeDisplayThreshold = InferenceGlobalContext.completeDisplayThreshold
+            // 显示提示框
+            Messages.showErrorDialog("complete Display Threshold补全结果显示阈值设置错误，请设置为空或正数字.", "参数设置错误")
+            return
+        }
 //         AccountManager.apiKey = mySettingsComponent!!.tokenText.trim().ifEmpty { null }
 //        InferenceGlobalContext.inferenceUri = mySettingsComponent!!.contrastUrlText.ifEmpty { null }
 //        mySettingsComponent!!.contrastUrlText = InferenceGlobalContext.inferenceUri ?: ""

@@ -138,7 +138,15 @@ class AppSettingsComponent {
                completeDisplayThresholdText, (UIUtil.DEFAULT_VGAP * 1.5).toInt(), false)
             addComponent(
                 JBLabel(
-                    "代码补全推荐显示阈值（默认值是3。范围是0到正无穷。数值越则小判断越严格，显示的代码补全推荐越少，显示的代码补全推荐质量越高。设置为空则代表正无穷，代表不进行阈值判断，所有补全推荐都会显示出来）",
+                    "代码补全推荐显示阈值（默认值是3。范围是0到正无穷。数值越则小判断越严格，显示的代码补全推荐越少，显示的代",
+                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+                ).apply {
+                    setCopyable(true)
+                }, 0
+            )
+            addComponent(
+                JBLabel(
+                    "码补全推荐质量越高。设置为空则代表正无穷，代表不进行阈值判断，所有补全推荐都会显示出来）",
                     UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
                 ).apply {
                     setCopyable(true)
