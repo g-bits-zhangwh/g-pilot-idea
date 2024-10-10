@@ -109,8 +109,8 @@ integrated into a single package that follows your privacy settings.</p>
         <postStartupActivity implementation="com.smallcloud.refactai.Initializer"/>
         <editorFactoryDocumentListener implementation="com.smallcloud.refactai.listeners.DocumentListener"/>
         <editorFactoryDocumentListener implementation="com.smallcloud.refactai.listeners.LSPDocumentListener"/>
-        <statusBarWidgetFactory id="Refact AI Status Bar"
-                                implementation="com.smallcloud.refactai.status_bar.SMCStatusBarWidgetFactory"/>
+<!--        <statusBarWidgetFactory id="Refact AI Status Bar"-->
+<!--                                implementation="com.smallcloud.refactai.status_bar.SMCStatusBarWidgetFactory"/>-->
         <notificationGroup id="Refact AI Notification Group" displayType="BALLOON"/>
         <completion.contributor language="any"
                                 implementationClass="com.smallcloud.refactai.modes.completion.PopupCompletionContributor"
@@ -118,7 +118,7 @@ integrated into a single package that follows your privacy settings.</p>
 
         <applicationConfigurable parentId="tools"
                                  instance="com.smallcloud.refactai.settings.AppSettingsConfigurable"
-                                 id="refactai_advanced_settings"
+                                 id="gpilot_advanced_settings"
                                  displayName="G-pilot"/>
         <errorHandler implementation="com.smallcloud.refactai.PluginErrorReportSubmitter"/>
 
@@ -126,11 +126,12 @@ integrated into a single package that follows your privacy settings.</p>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.AcceptActionsPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.CancelActionsPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.ForceCompletionActionPromoter"/>
+        <actionPromoter implementation="com.smallcloud.refactai.listeners.ForceMultiCompletionActionPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeActionPromoter"/>
 
-        <toolWindow id="Refact" anchor="right"
-                    canCloseContents="true"
-                    factoryClass="com.smallcloud.refactai.panes.RefactAIToolboxPaneFactory"/>
+<!--        <toolWindow id="Refact" anchor="right"-->
+<!--                    canCloseContents="true"-->
+<!--                    factoryClass="com.smallcloud.refactai.panes.RefactAIToolboxPaneFactory"/>-->
 
         <applicationService serviceImplementation="com.smallcloud.refactai.settings.AppSettingsState"/>
         <applicationService serviceImplementation="com.smallcloud.refactai.settings.PrivacyState"/>
@@ -162,6 +163,12 @@ integrated into a single package that follows your privacy settings.</p>
                 text="Run Code Completion Manually"
                 description="Refact AI Make A Manual Trigger Completion">
             <keyboard-shortcut first-keystroke="ctrl shift SPACE" keymap="$default"/>
+        </action>
+        <action class="com.smallcloud.refactai.listeners.ForceMultiCompletionAction"
+                id="ForceMultiCompletionAction"
+                text="Run Code Completion Manually"
+                description="Refact AI Make A Manual Multiline Trigger Completion">
+            <keyboard-shortcut first-keystroke="ctrl shift ENTER" keymap="$default"/>
         </action>
 <!--        <group id="RefactAIPrivacy" popup="true" class="com.smallcloud.refactai.privacy.RefactAIPrivacyGroupAction">-->
 <!--            <add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
