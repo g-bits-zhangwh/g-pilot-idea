@@ -57,6 +57,7 @@ class CompletionMode(
 
     override fun onTextChange(event: DocumentEventExtra) {
         if (completionInProgress) return
+        if (!InferenceGlobalContext.enableAutoSuggest) return
         val fileName = getActiveFile(event.editor.document, event.editor.project) ?: return
         if (PrivacyService.getPrivacy(FileDocumentManager.getInstance().getFile(event.editor.document))
             == Privacy.DISABLED && !InferenceGlobalContext.isSelfHosted) return
@@ -67,6 +68,9 @@ class CompletionMode(
         val logicalPos = event.editor.caretModel.logicalPosition
         var text = editor.document.text
         var offset = -1
+        var fileType = FileDocumentManager.getInstance().getFile(event.editor.document)?.extension
+        if (fileType != null )
+            fileType = ".$fileType"
         ApplicationManager.getApplication().runReadAction {
             offset = editor.caretModel.offset
         }
@@ -127,7 +131,11 @@ class CompletionMode(
             stat, "Infill", "infill", promptInfo,
             baseUrl = baseUrl,
             stream = false, model = InferenceGlobalContext.model,
-            multiline = isMultiline, useAst = InferenceGlobalContext.astIsEnabled,
+            multiline = isMultiline,
+            useAst = InferenceGlobalContext.astIsEnabled,
+            showMultiline = event.showMultiline,
+            forceDisplay = event.force,
+            fileType = fileType,
         ) ?: return
 
         processTask = scheduler.schedule({

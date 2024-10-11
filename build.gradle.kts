@@ -22,8 +22,9 @@ dependencies {
 
 
 
-group = "com.smallcloud"
-version = getVersionString("1.4.1")
+group = "com.zhangwh"
+version = "0.1.0"
+//version = getVersionString("1.4.1")
 
 repositories {
     mavenCentral()

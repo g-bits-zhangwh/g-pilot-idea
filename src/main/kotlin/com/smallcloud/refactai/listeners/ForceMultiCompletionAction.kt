@@ -25,7 +25,7 @@ class ForceMultiCompletionAction :
             Logger.getInstance("ForceMultiCompletionAction").debug("executeWriteAction")
             val provider = ModeProvider.getOrCreateModeProvider(editor)
             provider.beforeDocumentChangeNonBulk(null, editor)
-            provider.onTextChange(null, editor, true)
+            provider.onTextChange(null, editor, true, true)
         }
 
         override fun isEnabledForCaret(

@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin require-restart="true">
-    <id>com.smallcloud.codify</id>
-    <name>Refact.ai</name>
-    <vendor email="info@smallcloud.ai"
-            url="https://refact.ai/?utm_source=jb&amp;utm_medium=marketplace&amp;utm_campaign=plugin">smallcloudai
+    <id>com.zhangwh.g_pilot_idea</id>
+    <name>G-pilot</name>
+    <vendor >zhangwh
     </vendor>
+    <version>0.1.0</version>
 
     <description><![CDATA[
 <h2>Refact.ai: The AI Assistant for Code Writing and Refactoring.</h2>

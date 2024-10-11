@@ -14,6 +14,7 @@ import com.smallcloud.refactai.io.InferenceGlobalContextChangedNotifier
 import java.net.URI
 import java.util.concurrent.atomic.AtomicInteger
 import com.smallcloud.refactai.account.AccountManager.Companion.instance as AccountManager
+import java.util.UUID
 
 /**
  * Supports storing the application settings in a persistent way.
@@ -23,7 +24,7 @@ import com.smallcloud.refactai.account.AccountManager.Companion.instance as Acco
 
 @State(name = "com.smallcloud.userSettings.AppSettingsState", storages = [
     Storage("CodifySettings.xml", deprecated = true),
-    Storage("SMCSettings.xml"),
+    Storage("G-pilot-idea-Settings.xml"),
 ])
 class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var apiKey: String? = null
@@ -34,6 +35,14 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var streamlinedLoginTicketWasCreatedTs: Long? = null
     var inferenceUri: String? = null
     var userInferenceUri: String? = "http://172.20.158.92:8010/"
+    var multilineInferenceUri: String? = "http://172.20.158.92:8011/"
+    var extensionId: String = "com.zhangwh.g_pilot_idea"
+    var username: String? = null
+    var ide: String = if (System.getProperty("idea.platform.prefix") == "Idea") {
+        "idea"
+    } else {
+        "pycharm"
+    }
     var loginMessage: String? = null
     var tooltipMessage: String? = null
     var inferenceMessage: String? = null
@@ -166,6 +175,17 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
 
     override fun loadState(state: AppSettingsState) {
         XmlSerializerUtil.copyBean(state, this)
+    }
+
+    fun initializeUsername(): String {
+        if (instance.username.isNullOrEmpty()) {
+            val username = "${instance.ide}_user(${UUID.randomUUID()})"
+            instance.username = username
+            ApplicationManager.getApplication().saveSettings()
+            return username
+        } else {
+            return instance.username!!
+        }
     }
 
     companion object {

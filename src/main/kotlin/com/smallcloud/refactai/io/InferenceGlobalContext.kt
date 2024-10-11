@@ -41,11 +41,39 @@ class InferenceGlobalContext : Disposable {
         get() {
             return AppSettingsState.userInferenceUri
         }
-        set(newInferenceUrl) {
-            if (newInferenceUrl == inferenceUri) return
-            messageBus
-                    .syncPublisher(InferenceGlobalContextChangedNotifier.TOPIC)
-                    .userInferenceUriChanged(newInferenceUrl)
+        set(newValue) {
+        }
+
+    var multilineInferenceUri: String?
+        get() {
+            return AppSettingsState.multilineInferenceUri
+        }
+        set(newValue) {
+        }
+
+    var extensionId: String
+        get() {
+            return AppSettingsState.extensionId
+        }
+        set(newValue) {
+        }
+
+    var ide: String
+        get() {
+            return AppSettingsState.ide
+        }
+        set(newValue) {
+        }
+
+    var username: String
+        get() {
+            return if (AppSettingsState.username == null){
+                AppSettingsState.initializeUsername()
+            } else {
+                AppSettingsState.username!!
+            }
+        }
+        set(newValue) {
         }
 
     // cloudInferenceUri is uri from SMC server; must be change only in login method

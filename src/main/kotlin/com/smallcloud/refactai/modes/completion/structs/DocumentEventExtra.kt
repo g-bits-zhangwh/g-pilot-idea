@@ -9,6 +9,7 @@ data class DocumentEventExtra(
     val editor: Editor,
     val ts: Long,
     val force: Boolean = false,
+    val showMultiline: Boolean = false,
     val offsetCorrection: Int = 0
 ) {
     companion object {

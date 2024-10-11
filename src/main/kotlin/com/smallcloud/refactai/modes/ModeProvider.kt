@@ -108,9 +108,9 @@ class ModeProvider(
         beforeTextChangeEventsQueue.add(DocumentEventExtra(event, editor, currentTimeMillis()))
     }
 
-    fun onTextChange(event: DocumentEvent?, editor: Editor, force: Boolean) {
+    fun onTextChange(event: DocumentEvent?, editor: Editor, force: Boolean, showMultiline: Boolean) {
         if (event?.newFragment.toString() == DUMMY_IDENTIFIER) return
-        onTextChangeEventsQueue.add(DocumentEventExtra(event, editor, currentTimeMillis(), force))
+        onTextChangeEventsQueue.add(DocumentEventExtra(event, editor, currentTimeMillis(), force, showMultiline))
     }
 
     fun onCaretChange(event: CaretEvent) {

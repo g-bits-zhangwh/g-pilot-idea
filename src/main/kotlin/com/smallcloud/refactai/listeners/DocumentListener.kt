@@ -25,7 +25,7 @@ class DocumentListener : BulkAwareDocumentListener, Disposable {
         if (!InferenceGlobalContext.useAutoCompletion) return
         val editor = getActiveEditor(event.document) ?: return
         val provider = ModeProvider.getOrCreateModeProvider(editor)
-        provider.onTextChange(event, editor, false)
+        provider.onTextChange(event, editor, false, false)
     }
 
     private fun getActiveEditor(document: Document): Editor? {

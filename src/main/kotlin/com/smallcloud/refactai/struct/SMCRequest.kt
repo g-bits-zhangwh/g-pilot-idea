@@ -37,11 +37,23 @@ data class SMCParameters(
     @SerializedName("max_new_tokens") var maxNewTokens: Int = 50
 )
 
+data class GpilotParameters (
+    @SerializedName("generate_url") var generateUrl: String? = null,
+    var ide: String,
+    var username: String,
+    @SerializedName("show_multiline") var showMultiline: Boolean,
+    @SerializedName("force_display") var forceDisplay: Boolean,
+    @SerializedName("extension_version") var extensionVersion: String,
+    @SerializedName("complete_display_threshold") var completeDisplayThreshold: String,
+    @SerializedName("file_type") var fileType: String? = null,
+)
+
 data class SMCRequestBody(
     var inputs: SMCInputs = SMCInputs(),
     var stream: Boolean = true,
     var parameters: SMCParameters = SMCParameters(),
     var model: String? = null,
+    @SerializedName("gpilotparameters") var gpilotParameters: GpilotParameters,
     @SerializedName("no_cache") var noCache: Boolean = false,
     @SerializedName("use_ast") var useAst: Boolean = false,
 )

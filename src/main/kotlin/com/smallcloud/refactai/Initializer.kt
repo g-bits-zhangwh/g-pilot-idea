@@ -23,7 +23,8 @@ class Initializer : StartupActivity, Disposable {
             Logger.getInstance("SMCInitializer").info("Bin prefix = ${Resources.binPrefix}")
             if (AppSettingsState.instance.isFirstStart) {
                 AppSettingsState.instance.isFirstStart = false
-                ChatPaneInvokeAction().actionPerformed()
+                AppSettingsState.instance.initializeUsername()
+//                ChatPaneInvokeAction().actionPerformed()
             }
             settingsStartup()
             notificationStartup()

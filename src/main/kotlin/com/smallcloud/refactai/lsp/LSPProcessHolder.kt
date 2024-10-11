@@ -148,7 +148,7 @@ class LSPProcessHolder(val project: Project) : Disposable {
             })
 
         Companion::class.java.getResourceAsStream(
-            "/bin/${binPrefix}/refact-lsp${getExeSuffix()}"
+            "/bin/${binPrefix}/g-pilot-vs-lsp${getExeSuffix()}"
         ).use { input ->
             if (input == null) {
                 emitError("LSP server is not found for host operating system, please contact support")
@@ -319,7 +319,7 @@ class LSPProcessHolder(val project: Project) : Disposable {
         val BIN_PATH = Path(
             getTempDirectory(),
             ApplicationInfo.getInstance().build.toString().replace(Regex("[^A-Za-z0-9 ]"), "_") +
-                "_refact_lsp${getExeSuffix()}"
+                "_g_pilot_vs_lsp${getExeSuffix()}"
         ).toString()
 
         // here ?

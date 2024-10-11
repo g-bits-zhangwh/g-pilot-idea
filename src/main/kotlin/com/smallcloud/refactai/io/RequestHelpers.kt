@@ -51,12 +51,12 @@ fun streamedInferenceFetch(
     val gson = Gson()
     val uri = request.uri
     val body = gson.toJson(request.body)
-    val headers = mapOf(
-        "Authorization" to "Bearer ${request.token}",
-    )
+//    val headers = mapOf(
+//        "Authorization" to "Bearer ${request.token}",
+//    )
 
     val job = InferenceGlobalContext.connection.post(
-        uri, body, headers,
+        uri, body, null,
         stat = request.stat,
         dataReceiveEnded = dataReceiveEnded,
         dataReceived = { body: String, reqId: String ->
