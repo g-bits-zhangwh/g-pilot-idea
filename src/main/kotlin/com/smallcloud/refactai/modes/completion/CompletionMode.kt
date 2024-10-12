@@ -141,7 +141,7 @@ class CompletionMode(
             stat, "Infill", "infill", promptInfo,
             baseUrl = baseUrl,
             stream = false, model = InferenceGlobalContext.model,
-            multiline = isMultiline,
+            multiline = true,
             useAst = InferenceGlobalContext.astIsEnabled,
             showMultiline = event.showMultiline,
             forceDisplay = event.force,
@@ -265,7 +265,7 @@ class CompletionMode(
                 completionLayout?.lastCompletionData?.createdTs != prediction.created) {
                 Completion(request.body.inputs.sources.values.toList().first(),
                     offset = editorState.offset,
-                    multiline = request.body.inputs.multiline,
+                    multiline = false,
                     createdTs = prediction.created,
                     isFromCache = prediction.cached,
                     snippetTelemetryId = prediction.snippetTelemetryId,
@@ -329,12 +329,12 @@ class CompletionMode(
     override fun onTabPressed(editor: Editor, caret: Caret?, dataContext: DataContext) {
         val params = completionLayout?.lastCompletionData?.let {
             AcceptData(
-                requestPrompt = if (InferenceGlobalContext.agreeCodeCollect) {
+                requestPrompt = if (InferenceGlobalContext.agreeCodeCollect && it.completeDataCollect) {
                     it.originalText
                 } else {
                     ""
                 },
-                completions = if (InferenceGlobalContext.agreeCodeCollect) {
+                completions = if (InferenceGlobalContext.agreeCodeCollect && it.completeDataCollect) {
                     it.completion
                 } else {
                     ""

@@ -108,8 +108,9 @@ class AsyncCompletionLayout(
             val currentLine = completionData.originalText.substring(completionData.offset)
                     .substringBefore('\n', "")
             val patch = DiffUtils.diff(currentLine.toList(), completionData.completion.toList())
-            for (delta in patch.getDeltas()) {
-                if (delta.type != DeltaType.INSERT) { continue }
+            for ((index, delta) in patch.getDeltas().withIndex()) {
+                if (index > completionData.completeIncludeCharNum) break
+//                if (delta.type != DeltaType.INSERT) { continue }
                 val currentOffset = editorState.offset + delta.source.position
                 var blockText = delta.target.lines?.joinToString("") ?: ""
                 val currentText = inlayer.getText(currentOffset) ?: ""
