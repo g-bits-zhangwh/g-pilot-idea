@@ -89,9 +89,10 @@ class CompletionMode(
         val rightOfCursor = text.substring(offset,
             editor.document.getLineEndOffset(logicalPos.line))
 
-        if (!rightOfCursor.matches(specialSymbolsRegex)) return
+//        if (!rightOfCursor.matches(specialSymbolsRegex)) return
 
-        val isMultiline = currentLine.all { it == ' ' || it == '\t' }
+//        val isMultiline = currentLine.all { it == ' ' || it == '\t' }
+        val isMultiline = false
         var pos = 0
         if (isMultiline) {
             val startOffset = editor.document.getLineStartOffset(logicalPos.line)
