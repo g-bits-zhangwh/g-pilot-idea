@@ -92,6 +92,9 @@ class CompletionState(
 //            endIndex = maxOf(endIndex, startIndex),
 //            createdTs = System.currentTimeMillis(),
 //            leftSymbolsToRemove = leftSymbolsToRemove,
+            completeMultiLine = false,
+            completeIncludeCharNum = 0,
+            completeDataCollect = false,
         )
     }
 }

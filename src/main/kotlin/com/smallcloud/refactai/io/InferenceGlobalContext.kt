@@ -6,6 +6,7 @@ import com.intellij.util.messages.MessageBus
 import com.smallcloud.refactai.struct.DeploymentMode
 import com.smallcloud.refactai.struct.SMCRequest
 import com.smallcloud.refactai.struct.SMCRequestBody
+import okhttp3.OkHttpClient
 import java.net.URI
 import com.smallcloud.refactai.account.AccountManager.Companion.instance as AccountManager
 import com.smallcloud.refactai.settings.AppSettingsState.Companion.instance as AppSettingsState
@@ -13,6 +14,7 @@ import com.smallcloud.refactai.settings.AppSettingsState.Companion.instance as A
 class InferenceGlobalContext : Disposable {
     private val messageBus: MessageBus = ApplicationManager.getApplication().messageBus
     var connection: AsyncConnection = AsyncConnection()
+    val client = OkHttpClient()
 
     fun canRequest(): Boolean {
         return status == ConnectionStatus.CONNECTED

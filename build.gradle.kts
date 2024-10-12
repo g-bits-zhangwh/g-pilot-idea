@@ -15,6 +15,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
     implementation("com.vladsch.flexmark:flexmark-all:0.64.8")
     implementation("io.github.kezhenxu94:cache-lite:0.2.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
     // test libraries
     testImplementation(kotlin("test"))

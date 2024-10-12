@@ -10,7 +10,10 @@ data class SMCStreamingPeace(
     @SerializedName("snippet_telemetry_id") val snippetTelemetryId: Int? = null,
     val cached: Boolean = false,
     @Expose
-    var requestId: String = ""
+    var requestId: String = "",
+    @SerializedName("multi_line") val multiLine: Boolean,
+    @SerializedName("complete_include_char_num") val completeIncludeCharNum: Int,
+    @SerializedName("complete_data_collect") val completeDataCollect: Boolean,
 )
 
 

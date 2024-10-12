@@ -8,7 +8,10 @@ data class Completion(
     val offset: Int,
     val createdTs: Double = -1.0,
     val isFromCache: Boolean = false,
-    var snippetTelemetryId: Int? = null
+    var snippetTelemetryId: Int? = null,
+    val completeMultiLine: Boolean,
+    val completeIncludeCharNum: Int,
+    val completeDataCollect: Boolean,
 ) {
     fun updateCompletion(text: String) {
         completion += text

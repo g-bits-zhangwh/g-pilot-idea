@@ -32,6 +32,15 @@ import com.smallcloud.refactai.io.InferenceGlobalContext.Companion.instance as I
 import com.smallcloud.refactai.lsp.LSPProcessHolder.Companion.getInstance as getLSPProcessHolder
 import com.smallcloud.refactai.privacy.PrivacyService.Companion.instance as PrivacyService
 import com.smallcloud.refactai.statistic.UsageStats.Companion.instance as UsageStats
+import com.google.gson.Gson
+import com.smallcloud.refactai.Resources
+import com.smallcloud.refactai.modes.completion.structs.AcceptData
+import java.net.URI
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+
 
 private val specialSymbolsRegex = "^[:\\s\\t\\n\\r(){},.\"'\\];]*\$".toRegex()
 class CompletionMode(
@@ -258,7 +267,10 @@ class CompletionMode(
                     multiline = request.body.inputs.multiline,
                     createdTs = prediction.created,
                     isFromCache = prediction.cached,
-                    snippetTelemetryId = prediction.snippetTelemetryId
+                    snippetTelemetryId = prediction.snippetTelemetryId,
+                    completeMultiLine = prediction.multiLine,
+                    completeIncludeCharNum = prediction.completeIncludeCharNum,
+                    completeDataCollect = prediction.completeDataCollect,
                 )
             } else {
                 completionLayout!!.lastCompletionData!!
@@ -314,6 +326,40 @@ class CompletionMode(
     }
 
     override fun onTabPressed(editor: Editor, caret: Caret?, dataContext: DataContext) {
+        val params = completionLayout?.lastCompletionData?.let {
+            AcceptData(
+                requestPrompt = if (InferenceGlobalContext.agreeCodeCollect) {
+                    it.originalText
+                } else {
+                    ""
+                },
+                completions = if (InferenceGlobalContext.agreeCodeCollect) {
+                    it.completion
+                } else {
+                    ""
+                },
+                completionsLength=it.completion.length,
+                userName = InferenceGlobalContext.username,
+                multiLine = it.completeMultiLine,
+                ide= InferenceGlobalContext.ide,
+            )
+        }
+        if (params != null) {
+            val json = Gson().toJson(params)
+            val body = json.toRequestBody("application/json; charset=utf-8".toMediaType())
+            val request = Request.Builder()
+                .url("${InferenceGlobalContext.inferenceUri}accept")
+                .post(body)
+                .build()
+
+            InferenceGlobalContext.client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                override fun onResponse(call: Call, response: Response) {
+                }
+            })
+        }
+
         completionLayout?.apply {
             applyPreview(caret ?: editor.caretModel.currentCaret)
             lastCompletionData?.snippetTelemetryId?.let {
