@@ -286,7 +286,7 @@ class CompletionMode(
             app.invokeLater {
                 synchronized(this) {
                     renderCompletion(
-                        editorState.editor, editorState, completion, !prediction.cached
+                        editorState.editor, editorState, completion, false
                     )
                 }
             }
