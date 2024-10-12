@@ -7,6 +7,7 @@ import com.intellij.openapi.editor.markup.TextAttributes
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Rectangle
+import java.awt.Font
 
 class AsyncLineRenderer(
     initialText: String,
@@ -26,11 +27,23 @@ class AsyncLineRenderer(
 
     override fun calcWidthInPixels(inlay: Inlay<*>): Int {
         synchronized(this) {
-            val width = editor.contentComponent
-                .getFontMetrics(RenderHelper.getFont(editor, deprecated)).stringWidth(text)
+            var totalWidth = 0
+            val userFont = RenderHelper.getFont(editor, deprecated)
+            val chineseFont = Font("Microsoft YaHei", userFont.style, userFont.size)
 
-            return maxOf(width, 1)
+            for (t in text) {
+                val font = if (isChineseCharacter(t)) chineseFont else userFont
+                val fontMetrics = editor.contentComponent.getFontMetrics(font)
+                totalWidth += fontMetrics.charWidth(t)
+            }
+
+            return maxOf(totalWidth, 1)
         }
+    }
+
+    private fun isChineseCharacter(ch: Char): Boolean {
+        return (ch in '\u4E00'..'\u9FFF') ||  // CJK Unified Ideographs
+                (ch in '\u3400'..'\u4DBF')   // CJK Unified Ideographs Extension A
     }
 
     override fun paint(
@@ -39,11 +52,24 @@ class AsyncLineRenderer(
         targetRegion: Rectangle,
         textAttributes: TextAttributes
     ) {
+        val userFont = RenderHelper.getFont(editor, deprecated)
+        val chineseFont = Font("Microsoft YaHei", userFont.style, userFont.size)
         synchronized(this) {
             color = color ?: RenderHelper.color
             g.color = color
-            g.font = RenderHelper.getFont(editor, deprecated)
-            g.drawString(text, targetRegion.x, targetRegion.y + editor.ascent)
+            var x = targetRegion.x // 用于控制每个字符的横向位置
+
+            for (t in text) {
+                g.font = if (isChineseCharacter(t)){
+                    chineseFont
+                } else {
+                    userFont
+                }
+                g.drawString(t.toString(), x, targetRegion.y + editor.ascent)
+
+                // 更新 x 坐标，确保下一个字符绘制在右边
+                x += g.fontMetrics.charWidth(t)
+            }
         }
     }
 }
