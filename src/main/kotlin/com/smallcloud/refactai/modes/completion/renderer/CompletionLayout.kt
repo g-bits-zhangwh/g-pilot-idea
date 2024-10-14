@@ -14,6 +14,7 @@ import com.smallcloud.refactai.modes.EditorTextState
 import com.smallcloud.refactai.modes.completion.structs.Completion
 import java.util.concurrent.Future
 import kotlin.math.min
+import com.smallcloud.refactai.io.InferenceGlobalContext.Companion.instance as InferenceGlobalContext
 
 class AsyncCompletionLayout(
         private val editor: Editor
@@ -173,6 +174,7 @@ class AsyncCompletionLayout(
                 }
                 finalUserText = finalUserText.substring(0, j + addedTextLength) + remainder + finalUserText.substring(j + addedTextLength)
             }
+            completionData.finalCompletionOffset = j + addedTextLength + remainder.length
             completionData.finalUserShowText = finalUserText
 //            val patch = DiffUtils.diff(currentLine.toList(), completionData.completion.toList())
 //            for ((index, delta) in patch.getDeltas().withIndex()) {
@@ -298,7 +300,12 @@ class AsyncCompletionLayout(
                 endIndex = completion.offset + currentLine.length
             }
             editor.document.replaceString(startIndex, endIndex, finalUserShowText)
-            editor.caretModel.moveToOffset(startIndex + finalUserShowText.length)
+            completion.finalCompletionOffset
+            if (!InferenceGlobalContext.autoJumpToEnd && completion.finalCompletionOffset != null ){
+                editor.caretModel.moveToOffset(startIndex + completion.finalCompletionOffset!!)
+            } else{
+                editor.caretModel.moveToOffset(startIndex + finalUserShowText.length)
+            }
         }
     }
 

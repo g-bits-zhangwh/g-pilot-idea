@@ -71,6 +71,7 @@ class AppSettingsConfigurable : Configurable {
 //             modified || mySettingsComponent!!.inferenceModel?.trim()?.ifEmpty { null } != InferenceGlobalContext.model
         var modified = mySettingsComponent!!.enableAutoSuggest != InferenceGlobalContext.enableAutoSuggest
         modified = modified || mySettingsComponent!!.agreeCodeCollect != InferenceGlobalContext.agreeCodeCollect
+        modified = modified || mySettingsComponent!!.autoJumpToEnd != InferenceGlobalContext.autoJumpToEnd
         modified = modified || mySettingsComponent!!.completeDisplayThreshold != InferenceGlobalContext.completeDisplayThreshold
 //         modified = modified || mySettingsComponent!!.completionMaxTokens!= InferenceGlobalContext.completionMaxTokens
 //         modified = modified || mySettingsComponent!!.telemetrySnippetsEnabled != InferenceGlobalContext.telemetrySnippetsEnabled
@@ -102,6 +103,7 @@ class AppSettingsConfigurable : Configurable {
 //         InferenceGlobalContext.vecdbFileLimit = mySettingsComponent!!.vecdbFileLimit
         InferenceGlobalContext.enableAutoSuggest = mySettingsComponent!!.enableAutoSuggest
         InferenceGlobalContext.agreeCodeCollect = mySettingsComponent!!.agreeCodeCollect
+        InferenceGlobalContext.autoJumpToEnd = mySettingsComponent!!.autoJumpToEnd
         InferenceGlobalContext.completeDisplayThreshold = mySettingsComponent!!.completeDisplayThreshold
 //         InferenceGlobalContext.completionMaxTokens = mySettingsComponent!!.completionMaxTokens
 //         InferenceGlobalContext.telemetrySnippetsEnabled = mySettingsComponent!!.telemetrySnippetsEnabled
@@ -123,6 +125,7 @@ class AppSettingsConfigurable : Configurable {
 //         mySettingsComponent!!.inferenceModel = InferenceGlobalContext.model
         mySettingsComponent!!.enableAutoSuggest = InferenceGlobalContext.enableAutoSuggest
         mySettingsComponent!!.agreeCodeCollect = InferenceGlobalContext.agreeCodeCollect
+        mySettingsComponent!!.autoJumpToEnd = InferenceGlobalContext.autoJumpToEnd
         mySettingsComponent!!.completeDisplayThreshold = InferenceGlobalContext.completeDisplayThreshold
 //         mySettingsComponent!!.completionMaxTokens = InferenceGlobalContext.completionMaxTokens
 //         mySettingsComponent!!.telemetrySnippetsEnabled = InferenceGlobalContext.telemetrySnippetsEnabled

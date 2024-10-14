@@ -52,6 +52,7 @@ class AppSettingsComponent {
     private val myVecdbFileLimitText = JBTextField()
     private val enableAutoSuggestCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.enableAutoSuggest"))
     private val agreeCodeCollectCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.agreeCodeCollect"))
+    private val autoJumpToEndCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.autoJumpToEnd"))
     private val completeDisplayThresholdText = JBTextField()
     private val telemetrySnippetCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.telemetryCodeSnippets"))
     private val pauseCompletionCheckBox = JCheckBox(RefactAIBundle.message("advancedSettings.pauseCompletion"))
@@ -128,6 +129,16 @@ class AppSettingsComponent {
             addComponent(
                 JBLabel(
                     "是否同意进行代码数据收集（收集的匿名数据）",
+                    UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
+                ).apply {
+                    setCopyable(true)
+                }, 0
+            )
+
+            addComponent(autoJumpToEndCheckBox, UIUtil.LARGE_VGAP)
+            addComponent(
+                JBLabel(
+                    "每次采纳补全后是否自动跳转到行尾",
                     UIUtil.ComponentStyle.SMALL, UIUtil.FontColor.BRIGHTER
                 ).apply {
                     setCopyable(true)
@@ -319,6 +330,12 @@ class AppSettingsComponent {
         get() = agreeCodeCollectCheckBox.isSelected
         set(newVal) {
             agreeCodeCollectCheckBox.isSelected = newVal
+        }
+
+    var autoJumpToEnd: Boolean
+        get() = autoJumpToEndCheckBox.isSelected
+        set(newVal) {
+            autoJumpToEndCheckBox.isSelected = newVal
         }
 
     var completeDisplayThreshold: String

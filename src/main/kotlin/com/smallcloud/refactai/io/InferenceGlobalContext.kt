@@ -237,6 +237,15 @@ class InferenceGlobalContext : Disposable {
                .agreeCodeCollectChanged(newValue)
         }
 
+    var autoJumpToEnd: Boolean
+        get() = AppSettingsState.autoJumpToEnd
+        set(newValue) {
+            if (newValue == autoJumpToEnd) return
+            messageBus
+               .syncPublisher(InferenceGlobalContextChangedNotifier.TOPIC)
+               .autoJumpToEndChanged(newValue)
+        }
+
     var completeDisplayThreshold: String
         get() = AppSettingsState.completeDisplayThreshold
         set(newValue) {

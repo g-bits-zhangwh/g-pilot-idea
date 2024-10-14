@@ -63,6 +63,7 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var insecureSSL: Boolean = false
     var enableAutoSuggest: Boolean = true
     var agreeCodeCollect: Boolean = true
+    var autoJumpToEnd: Boolean = true
     var completeDisplayThreshold: String = "3"
     var telemetrySnippetsEnabled: Boolean = false
     var isFirstStart: Boolean = true
@@ -140,6 +141,9 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
                     }
                     override fun agreeCodeCollectChanged(newValue: Boolean) {
                         instance.agreeCodeCollect = newValue
+                    }
+                    override fun autoJumpToEndChanged(newValue: Boolean) {
+                        instance.autoJumpToEnd = newValue
                     }
                     override fun completeDisplayThresholdChanged(newValue: String)  {
                         instance.completeDisplayThreshold = newValue

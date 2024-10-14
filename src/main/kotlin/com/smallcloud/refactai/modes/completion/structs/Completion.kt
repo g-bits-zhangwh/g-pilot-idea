@@ -13,6 +13,7 @@ data class Completion(
     val completeIncludeCharNum: Int,
     val completeDataCollect: Boolean,
     var finalUserShowText: String? = null,
+    var finalCompletionOffset: Int? = null,
 ) {
     fun updateCompletion(text: String) {
         completion += text
