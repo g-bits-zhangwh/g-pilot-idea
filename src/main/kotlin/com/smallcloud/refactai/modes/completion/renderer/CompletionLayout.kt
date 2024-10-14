@@ -12,8 +12,6 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.util.concurrency.AppExecutorUtil
 import com.smallcloud.refactai.modes.EditorTextState
 import com.smallcloud.refactai.modes.completion.structs.Completion
-import dev.gitlive.difflib.DiffUtils
-import dev.gitlive.difflib.patch.DeltaType
 import java.util.concurrent.Future
 import kotlin.math.min
 
@@ -105,43 +103,108 @@ class AsyncCompletionLayout(
             needToRender: Boolean,
             animation: Boolean) {
         inlayer?.let { inlayer ->
-            val currentLine = completionData.originalText.substring(completionData.offset)
+            val remainderUserText = completionData.originalText.substring(completionData.offset)
                     .substringBefore('\n', "")
-            val patch = DiffUtils.diff(currentLine.toList(), completionData.completion.toList())
-            for ((index, delta) in patch.getDeltas().withIndex()) {
-                if (index > completionData.completeIncludeCharNum) break
-//                if (delta.type != DeltaType.INSERT) { continue }
-                val currentOffset = editorState.offset + delta.source.position
-                var blockText = delta.target.lines?.joinToString("") ?: ""
-                val currentText = inlayer.getText(currentOffset) ?: ""
-                if (blockText.startsWith(currentText)) {
-                    blockText = blockText.substring(currentText.length)
+            var remainder: String = completionData.completion
+            var addedTextLength = 0
+            var j = 0
+
+            while (j < completionData.completeIncludeCharNum + 1) {
+                if (j >= remainderUserText.length) break
+
+                val overlapChar: Char = remainderUserText[j]
+
+                val index: Int = remainder.indexOf(overlapChar)
+                if (index == -1) break
+
+                val addedText: String = remainder.substring(0, index)
+                remainder = remainder.substring(index + 1)
+
+                if (addedText.isNotEmpty()) {
+                    val insertOffset = editorState.offset + j
+                    if (needToRender) {
+                        if (animation) {
+                            for (ch in addedText.chunked(renderChunkSize)) {
+                                if (!this.needToRender) {
+                                    return@let
+                                }
+                                ApplicationManager.getApplication().invokeLater({
+                                    inlayer.addText(insertOffset, ch)
+                                }, { !this.needToRender })
+                                Thread.sleep(renderChunkTimeoutMs)
+                            }
+                        } else {
+                            ApplicationManager.getApplication().invokeLater({
+                                inlayer.addText(insertOffset, addedText)
+                            }, { !this.needToRender })
+                        }
+                        rendered = true
+                    } else {
+                        inlayer.addTextWithoutRendering(insertOffset, addedText)
+                    }
+                    addedTextLength += addedText.length
                 }
+                j++
+            }
 
-                inlayer.setText(currentOffset, currentText + blockText)
-                val text = blockText
-
+            if (remainder.isNotEmpty()) {
+                val insertOffset = editorState.offset + j
                 if (needToRender) {
                     if (animation) {
-                        for (ch in text.chunked(renderChunkSize)) {
+                        for (ch in remainder.chunked(renderChunkSize)) {
                             if (!this.needToRender) {
                                 return@let
                             }
                             ApplicationManager.getApplication().invokeLater({
-                                inlayer.addText(currentOffset, ch)
+                                inlayer.addText(insertOffset, ch)
                             }, { !this.needToRender })
                             Thread.sleep(renderChunkTimeoutMs)
                         }
                     } else {
                         ApplicationManager.getApplication().invokeLater({
-                            inlayer.addText(currentOffset, text)
+                            inlayer.addText(insertOffset, remainder)
                         }, { !this.needToRender })
                     }
                     rendered = true
                 } else {
-                    inlayer.addTextWithoutRendering(currentOffset, text)
+                    inlayer.addTextWithoutRendering(insertOffset, remainder)
                 }
             }
+//            val patch = DiffUtils.diff(currentLine.toList(), completionData.completion.toList())
+//            for ((index, delta) in patch.getDeltas().withIndex()) {
+//                if (index > completionData.completeIncludeCharNum) break
+////                if (delta.type != DeltaType.INSERT) { continue }
+//                val currentOffset = editorState.offset + delta.source.position
+//                var blockText = delta.target.lines?.joinToString("") ?: ""
+//                val currentText = inlayer.getText(currentOffset) ?: ""
+//                if (blockText.startsWith(currentText)) {
+//                    blockText = blockText.substring(currentText.length)
+//                }
+//
+//                inlayer.setText(currentOffset, currentText + blockText)
+//                val text = blockText
+//
+//                if (needToRender) {
+//                    if (animation) {
+//                        for (ch in text.chunked(renderChunkSize)) {
+//                            if (!this.needToRender) {
+//                                return@let
+//                            }
+//                            ApplicationManager.getApplication().invokeLater({
+//                                inlayer.addText(currentOffset, ch)
+//                            }, { !this.needToRender })
+//                            Thread.sleep(renderChunkTimeoutMs)
+//                        }
+//                    } else {
+//                        ApplicationManager.getApplication().invokeLater({
+//                            inlayer.addText(currentOffset, text)
+//                        }, { !this.needToRender })
+//                    }
+//                    rendered = true
+//                } else {
+//                    inlayer.addTextWithoutRendering(currentOffset, text)
+//                }
+//            }
         }
     }
 
