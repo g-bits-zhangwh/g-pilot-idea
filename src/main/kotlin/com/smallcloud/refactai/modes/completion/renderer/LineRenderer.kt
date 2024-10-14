@@ -43,7 +43,9 @@ class AsyncLineRenderer(
 
     private fun isChineseCharacter(ch: Char): Boolean {
         return (ch in '\u4E00'..'\u9FFF') ||  // CJK Unified Ideographs
-                (ch in '\u3400'..'\u4DBF')   // CJK Unified Ideographs Extension A
+                (ch in '\u3400'..'\u4DBF') ||  // CJK Unified Ideographs Extension A
+                (ch in '\u3000'..'\u303F') ||  // CJK Symbols and Punctuation
+                (ch in '\uFF00'..'\uFFEF')     // Full-width ASCII and Full-width Punctuation
     }
 
     override fun paint(
