@@ -104,12 +104,13 @@ class AsyncCompletionLayout(
             animation: Boolean) {
         inlayer?.let { inlayer ->
             val remainderUserText = completionData.originalText.substring(completionData.offset)
-                    .substringBefore('\n', "")
+                    .substringBefore('\n')
             var remainder: String = completionData.completion
             var addedTextLength = 0
             var j = 0
+            var finalUserText: String = remainderUserText
 
-            while (j < completionData.completeIncludeCharNum + 1) {
+            while (j < completionData.completeIncludeCharNum) {
                 if (j >= remainderUserText.length) break
 
                 val overlapChar: Char = remainderUserText[j]
@@ -142,6 +143,7 @@ class AsyncCompletionLayout(
                     } else {
                         inlayer.addTextWithoutRendering(insertOffset, addedText)
                     }
+                    finalUserText = finalUserText.substring(0, j + addedTextLength) + addedText + finalUserText.substring(j + addedTextLength)
                     addedTextLength += addedText.length
                 }
                 j++
@@ -169,7 +171,9 @@ class AsyncCompletionLayout(
                 } else {
                     inlayer.addTextWithoutRendering(insertOffset, remainder)
                 }
+                finalUserText = finalUserText.substring(0, j + addedTextLength) + remainder + finalUserText.substring(j + addedTextLength)
             }
+            completionData.finalUserShowText = finalUserText
 //            val patch = DiffUtils.diff(currentLine.toList(), completionData.completion.toList())
 //            for ((index, delta) in patch.getDeltas().withIndex()) {
 //                if (index > completionData.completeIncludeCharNum) break
@@ -286,13 +290,15 @@ class AsyncCompletionLayout(
                 startIndex -= (editor.document.getLineEndOffset(line) - editor.document.getLineStartOffset(line))
             }
             var endIndex = completion.offset
+            if (completion.finalUserShowText == null) return
+            val finalUserShowText = completion.finalUserShowText ?: ""
             if (!completion.multiline) {
                 val currentLine = completion.originalText.substring(startIndex)
-                        .substringBefore('\n', "")
+                    .substringBefore('\n')
                 endIndex = completion.offset + currentLine.length
             }
-            editor.document.replaceString(startIndex, endIndex, completion.completion)
-            editor.caretModel.moveToOffset(startIndex + completion.completion.length)
+            editor.document.replaceString(startIndex, endIndex, finalUserShowText)
+            editor.caretModel.moveToOffset(startIndex + finalUserShowText.length)
         }
     }
 

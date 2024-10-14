@@ -12,6 +12,7 @@ data class Completion(
     val completeMultiLine: Boolean,
     val completeIncludeCharNum: Int,
     val completeDataCollect: Boolean,
+    var finalUserShowText: String? = null,
 ) {
     fun updateCompletion(text: String) {
         completion += text
