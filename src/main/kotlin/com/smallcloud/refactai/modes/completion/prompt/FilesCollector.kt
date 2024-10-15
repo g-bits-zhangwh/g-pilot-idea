@@ -83,13 +83,12 @@ class FilesCollector(
                 entry.lastEditorShown = System.currentTimeMillis()
             }
 
-            ObjectUtils.consumeIfCast((editor as PsiAwareTextEditorImpl).editor, EditorEx::class.java) {
-                it?.addFocusListener(object : FocusChangeListener {
-                    override fun focusGained(editor: Editor) {
-                        entry.lastEditorShown = System.currentTimeMillis()
-                    }
-                })
-            }
+            val editorEx = (editor as PsiAwareTextEditorImpl).editor as? EditorEx
+            editorEx?.addFocusListener(object : FocusChangeListener {
+                override fun focusGained(editor: Editor) {
+                    entry.lastEditorShown = System.currentTimeMillis()
+                }
+            })
         }
     }
 

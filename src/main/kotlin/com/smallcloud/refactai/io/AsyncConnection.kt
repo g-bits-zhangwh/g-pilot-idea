@@ -15,7 +15,6 @@ import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder
-import org.apache.hc.client5.http.ssl.TrustSelfSignedStrategy
 import org.apache.hc.core5.concurrent.FutureCallback
 import org.apache.hc.core5.http.*
 import org.apache.hc.core5.http.message.BasicHeader
@@ -42,7 +41,11 @@ private const val STREAMING_PREFIX = "data: "
 class AsyncConnection : Disposable {
     private val client: CloseableHttpAsyncClient = HttpAsyncClients.customHttp2()
         .setTlsStrategy(ClientTlsStrategyBuilder.create()
-            .setSslContext(SSLContexts.custom().loadTrustMaterial(TrustSelfSignedStrategy()).build())
+            .setSslContext(SSLContexts.custom()
+                .loadTrustMaterial { _, _ ->
+                    // 允许所有自签名证书
+                    true
+                }.build())
             .setTlsVersions(TLS.V_1_3, TLS.V_1_2)
             .build())
         .setRetryStrategy(DefaultHttpRequestRetryStrategy(5, TimeValue.ofMilliseconds(50)))

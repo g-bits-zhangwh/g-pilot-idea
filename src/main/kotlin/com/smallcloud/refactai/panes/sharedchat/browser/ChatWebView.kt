@@ -26,7 +26,8 @@ import org.cef.network.CefResponse
 import org.cef.network.CefURLRequest
 import org.cef.security.CefSSLInfo
 import javax.swing.JComponent
-
+import com.intellij.openapi.editor.colors.EditorColorsManager
+import com.intellij.openapi.editor.colors.EditorColorsScheme
 
 fun getActionKeybinding(actionId: String): String {
     // Get the KeymapManager instance
@@ -49,7 +50,8 @@ class ChatWebView(val editor: Editor, val messageHandler: (event: Events.FromCha
     }
 
     fun setStyle() {
-        val isDarkMode = UIUtil.isUnderDarcula()
+        val currentScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
+        val isDarkMode = currentScheme.name.contains("Darcula", ignoreCase = true)
         val mode = if (isDarkMode) {
             "dark"
         } else {
@@ -64,9 +66,9 @@ class ChatWebView(val editor: Editor, val messageHandler: (event: Events.FromCha
         val red = backgroundColour.red
         val green = backgroundColour.green
         val blue = backgroundColour.blue
-        this.webView.executeJavaScriptAsync("""document.body.style.setProperty("background-color", "rgb($red, $green, $blue");""")
-        this.webView.executeJavaScriptAsync("""document.body.class = "$bodyClass";""")
-        this.webView.executeJavaScriptAsync("""document.documentElement.className = "$mode";""")
+//        this.webView.executeJavaScriptAsync("""document.body.style.setProperty("background-color", "rgb($red, $green, $blue");""")
+//        this.webView.executeJavaScriptAsync("""document.body.class = "$bodyClass";""")
+//        this.webView.executeJavaScriptAsync("""document.documentElement.className = "$mode";""")
 
     }
 

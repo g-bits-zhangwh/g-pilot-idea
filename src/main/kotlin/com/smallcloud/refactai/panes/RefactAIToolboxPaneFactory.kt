@@ -20,14 +20,14 @@ class RefactAIToolboxPaneFactory : ToolWindowFactory {
         super.init(toolWindow)
     }
 
-    override fun isApplicable(project: Project): Boolean {
-        return try {
-            JBCefApp.isSupported() && JBCefApp.isStarted()
-            JBCefApp.isSupported()
-        } catch (_: Exception) {
-            false
-        }
-    }
+//    override fun isApplicable(project: Project): Boolean {
+//        return try {
+//            JBCefApp.isSupported() && JBCefApp.isStarted()
+//            JBCefApp.isSupported()
+//        } catch (_: Exception) {
+//            false
+//        }
+//    }
 
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {

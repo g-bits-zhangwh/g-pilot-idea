@@ -148,7 +148,8 @@ class ModeProvider(
                 val modeProvider = ModeProvider(editor)
                 providersToTs[hashId] = currentTimeMillis()
                 editor.caretModel.addCaretListener(GlobalCaretListener())
-                ObjectUtils.consumeIfCast(editor, EditorEx::class.java) {
+                val editorEx = editor as? EditorEx
+                editorEx?.let {
                     try {
                         it.addFocusListener(GlobalFocusListener(), modeProvider)
                     } catch (e: UnsupportedOperationException) {

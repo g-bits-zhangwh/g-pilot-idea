@@ -2,6 +2,8 @@ package com.smallcloud.refactai.panes.sharedchat
 
 import com.intellij.lang.Language
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.editor.colors.EditorColorsManager
+import com.intellij.openapi.editor.colors.EditorColorsScheme
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
@@ -55,7 +57,8 @@ class Editor (val project: Project) {
         val hasAst = AppSettingsState.instance.astIsEnabled
         val hasVecdb = AppSettingsState.instance.vecdbIsEnabled
         val features = Events.Config.Features(hasAst, hasVecdb)
-        val isDarkMode = UIUtil.isUnderDarcula()
+        val currentScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
+        val isDarkMode = currentScheme.name.contains("Darcula", ignoreCase = true)
         val mode = if (isDarkMode) "dark" else "light"
         val themeProps = Events.Config.ThemeProps(mode)
         val apiKey = instance.apiKey
