@@ -3,14 +3,14 @@
 ## 简介
 
 G-pilot是技术中心开发的代码补全工具，旨在为大家提供公司内网私有部署的、针对GS、c#、lua等语言特别优化过的代码补全工具。  
-目前G-pilot已开发了VSCode、VS2022、IDEA、pycharm四种IDE的插件，大家可以根据自己的需求选择使用。
+目前G-pilot已开发了VSCode、VS2022、jetbrains系列（IDEA、pycharm、Clion）等IDE插件，大家可以根据自己的需求选择使用。
 
 G-pilot模型训练：[https://m68gitlab.g-bits.com/aigc/g-pilot](https://m68gitlab.g-bits.com/aigc/g-pilot)  
 G-pilot vscode插件：[https://m68gitlab.g-bits.com/aigc/g-pilot-vscode](https://m68gitlab.g-bits.com/aigc/g-pilot-vscode)  
 G-pilot vscode插件后端：[https://m68gitlab.g-bits.com/aigc/g-pilot-lsp](https://m68gitlab.g-bits.com/aigc/g-pilot-lsp)  
 G-pilot VS扩展插件：[https://m68gitlab.g-bits.com/aigc/g-pilot-vs](https://m68gitlab.g-bits.com/aigc/g-pilot-vs)  
-G-pilot IDEA、pycharm扩展插件：[https://m68gitlab.g-bits.com/aigc/g-pilot-idea](https://m68gitlab.g-bits.com/aigc/g-pilot-idea)  
-G-pilot VS、IDEA、pycharm扩展插件后端：[https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp](https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp)
+G-pilot jetbrains系列（IDEA、pycharm、Clion）扩展插件：[https://m68gitlab.g-bits.com/aigc/g-pilot-idea](https://m68gitlab.g-bits.com/aigc/g-pilot-idea)  
+G-pilot VS、jetbrains系列（IDEA、pycharm、Clion）扩展插件后端：[https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp](https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp)
 
 ## 飞书使用交流群
 

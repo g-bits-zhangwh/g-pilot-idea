@@ -8,90 +8,114 @@
     <version>0.1.0</version>
 
     <description><![CDATA[
-<h2>Refact.ai: The AI Assistant for Code Writing and Refactoring.</h2>
-<p>
-    Refact is a cutting-edge AI tool designed to assist developers in writing and refining code.
-    It’s fast and supports Python, Java, PHP, C++, Javascript, TypeScript, and 20 more programming languages.
-</p>
-<p>
-    Try for free today and make your programming more enjoyable!
-</p>
-<p>
-    🔒 We put your privacy first. Refact allows you to restrict access to particular files or projects,
-    ensuring that your private code or confidential files are protected. And we don't collect datasets on the server
-    side.
-</p>
+<h1>G-pilot IDEA扩展插件</h1>
 
-<h3 style="margin-bottom:0">Functions That You Can Use in Refact:</h3>
-<ul style="margin-top:5">
-    <li><b>Code Completion:</b> As you write code, Refact suggests potential code completions based on the
-        context of your code, looking up and down. It can suggest whole functions, classes,
-        commonly used programming patterns, libraries, and APIs usage.
-    </li>
-    <br>
-    <li><b>Code Transformation:</b> You can automatically make your code shorter, cleaner,
-        and fix bugs — improving your efficiency as an engineer. Whether you're looking to optimize,
-        improve, or explain your code, Refact has got you covered.
-    </li>
-    <br>
-    <li><b>Integrated Chat:</b> Use natural language to generate, modify, and refine your code.
-        Chat can automatically pick up the selected code and put back the results.
-        It also provides you with documentation links.
-    </li>
-    <br>
-</ul>
+<h2>简介</h2>
 
-<h3>Self-Hosting</h3>
-<p>
-    Our own AI model behind Refact.ai is state-of-the-art (for the size and latency).
-    The weights are free to download on <a href="https://huggingface.co/smallcloudai">Huggingface</a>.
-</p>
-<p>
-    If you have your own NVIDIA GPU, you can try the <a href="https://refact.smallcloud.ai/docker">self-hosted
-    version</a>.
-</p>
+<p>G-pilot是技术中心开发的代码补全工具，旨在为大家提供公司内网私有部署的、针对GS、C#、Lua等语言特别优化过的代码补全工具。</p>
+<p>目前G-pilot已开发了VSCode、VS2022、jetbrains系列（IDEA、pycharm、Clion）等IDE插件，大家可以根据自己的需求选择使用。</p>
 
-<h3>Refact Enterprise Edition</h3>
-<p>Refact Enterprise Edition is tailored for teams looking for complete control of their Refact experience. This plan includes a suite of advanced features such as:</p>
+<p>G-pilot模型训练：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot">https://m68gitlab.g-bits.com/aigc/g-pilot</a></p>
+<p>G-pilot vscode插件：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vscode">https://m68gitlab.g-bits.com/aigc/g-pilot-vscode</a></p>
+<p>G-pilot vscode插件后端：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot-lsp">https://m68gitlab.g-bits.com/aigc/g-pilot-lsp</a></p>
+<p>G-pilot VS扩展插件：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vs">https://m68gitlab.g-bits.com/aigc/g-pilot-vs</a></p>
+<p>G-pilot jetbrains系列（IDEA、pycharm、Clion）扩展插件：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot-idea">https://m68gitlab.g-bits.com/aigc/g-pilot-idea</a></p>
+<p>G-pilot VS、jetbrains系列（IDEA、pycharm、Clion）扩展插件后端：<a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp">https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp</a></p>
+
+<h2>飞书使用交流群</h2>
+
+<p>目前G-pilot还在不断迭代和优化过程，欢迎大家点击<a href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=d44u4681-12a4-4ccc-8ae8-a8bd8d563695">飞书使用交流群链接</a>加入飞书使用交流群给我们提供宝贵的修改和优化建议。大家在使用过程遇到任何问题都可以直接在群里沟通和交流，插件的新版本发布也会在群里进行通知。</p>
+
+<h2>功能</h2>
+
+<p>目前G-pilot支持单行代码补全功能、多行代码补全功能、注释生成代码功能，其他AI功能后续根据大家需求来开发。</p>
+
+<h2>安装方式</h2>
+
+<p><strong>注意：</strong>使用G-pilot插件前，需要将其他代码补全插件如Copilot、Comate、Marscode、TabNine等禁用，避免代码补全的功能发生冲突。</p>
+<p>在VS的拓展商城搜索：<strong>G-pilot</strong>，点击安装成功后，<strong>关闭VS</strong>，随后会弹出一个VSIX安装窗口，然后点击<strong>Modify</strong>，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VSIX%E5%AE%89%E8%A3%85%E7%95%8C%E9%9D%A2.jpg" alt="VSIX安装界面" />
+<p>在等待十几秒后，出现下面界面则表示安装成功，再次打开VS即可正常使用G-pilot插件了。</p>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E7%95%8C%E9%9D%A2.jpg" alt="VS插件安装完成界面" />
+
+<h2>使用方法</h2>
+
+<h3>1. 单行代码补全功能</h3>
+
+<h4>触发方式</h4>
+<ol>
+  <li>代码文本发生改动时，会自动触发补全提示。</li>
+  <li>按组合键<strong>Shift + Ctrl + 空格</strong>，可以主动触发一次单行代码补全提示。</li>
+</ol>
+
+<h4>补全显示</h4>
+<p>补全成功触发后，会在光标后方以灰色字体显示补全结果，如下图所示：</p>
+<img src="https://github.com/zhangwenhao66/g-pilot-vscode-img/blob/main/img/%E8%A1%A5%E5%85%A8%E6%98%BE%E7%A4%BA.jpg?raw=true" alt="补全显示" />
+
+<h4>补全采用</h4>
+<p>按<strong>Tab</strong>键即可采用全部补全。</p>
+
+<h4>关闭补全显示</h4>
+<p>按<strong>Esc</strong>键即可关闭本次补全结果的显示。</p>
+
+<h3>2. 多行代码补全功能</h3>
+
+<h4>触发方式</h4>
+<p>按组合键<strong>Shift + Ctrl + Enter</strong>，可以主动触发多行代码补全提示。</p>
+<img src="https://github.com/zhangwenhao66/g-pilot-vscode-img/blob/main/img/%E5%A4%9A%E8%A1%8C%E8%A1%A5%E5%85%A8%E6%98%BE%E7%A4%BA.jpg?raw=true" alt="多行补全显示" />
+
+<h4>补全显示、补全采用、关闭补全显示</h4>
+<p>与单行代码补全功能一致。</p>
+
+<h3>3. 注释生成代码功能</h3>
+
+<h4>触发方式</h4>
+<p>与多行代码补全功能同理，在注释行处或者注释行下一行通过组合键<strong>Shift + Ctrl + Enter</strong>，也可主动触发注释生成代码提示。</p>
+
+<h4>补全显示、补全采用、关闭补全显示</h4>
+<p>与单行代码补全功能一致。</p>
+
+<h3>4. 重要参数设置</h3>
+
+<p>在IDEA菜单栏中选择<strong>文件</strong>，再点击<strong>设置</strong>打开设置界面。在左边栏点击展开<strong>工具</strong>选项，找到<strong>G-pilot</strong>，选择后则会显示出G-pilot相关的参数设置，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.jpg" alt="VS参数设置界面" />
+
+<h4>其中比较重要的参数如下：</h4>
 
 <ul>
-	<li><strong>Fine-Tuning</strong></li>
-	<li><strong>Access Control</strong></li>
-	<li><strong>vLLM Support</strong></li>
+  <li><strong>代码补全推荐显示阈值</strong></li>
+  <ul>
+    <li>默认值：3</li>
+    <li>范围：0~正无穷</li>
+    <li>说明：数值越小则判断越严格，显示的补全代码推荐越少，显示的补全代码质量越高。</li>
+    <li>特殊值：0代表所有补全代码推荐都不进行显示。空代表正无穷，所有补全推荐都会显示出来。</li>
+  </ul>
+
+  <li><strong>是否同意进行代码数据收集</strong></li>
+  <ul>
+    <li>默认：勾选</li>
+    <li>说明：如果勾选了，则会在你每次采纳补全推荐时，将该数据发送给后端进行记录（发送的数据不包含用户信息，收集的是匿名数据）。这些数据将会用于后续G-pilot模型的持续迭代升级。</li>
+  </ul>
+
+  <li><strong>采纳补全后是否自动跳转到行尾</strong></li>
+  <ul>
+    <li>默认：勾选</li>
+    <li>说明：如果勾选了，则会在你每次采纳补全推荐后自动跳转到行尾。</li>
+  </ul>
 </ul>
-
-<p>For a detailed guide on all the features and benefits of the Refact Enterprise Edition, please refer to our <a href="https://docs.refact.ai/guides/enterprise/">documentation</a>.</p>
-
-
-<h3>Support & Feedback</h3>
-<p>
-    Join our <a href="https://www.smallcloud.ai/discord">Discord</a> to get to know other community members, send us
-    feedback or suggestions and get support.
-</p>
-
-<h5>
-    IntelliSense, intelliCode, autocomplete, AI-assisted code completion, AI-powered code completion,
-    AI copilot, AI code snippets, code suggestion, code prediction, chatGPT, code GPT, codeGPT, GPT, GPT4, gpt4, GPT 4,
-    gpt 4
-</h5>
 ]]></description>
 
     <change-notes><![CDATA[
-<p>Refact.ai is an AI coding assistant, available for JetBrains IDEs and Visual Studio Code.</p>
+<h1>更改日志</h1>
 
-<p>In this major release, we introduce:</p>
+<h2>2024-10-15 v0.1.0</h2>
+
 <ul>
-<li>RustRover support.</li>
-<li>All new plugins are powered by <a href="https://github.com/smallcloudai/refact-lsp">Refact LSP</a>, our new open-source server written in Rust! Refact LSP converts high-level code completion, or chat requests into low-level LLM prompts and converts results back. </li>
-<li>Bugfixes and performance improvements</li>
+  <li>基于开源项目<a href="https://github.com/smallcloudai/refact-intellij">https://github.com/smallcloudai/refact-intellij</a>进行开发</li>
+  <li>更改项目图标和标识为G-pilot</li>
+  <li>固定一些配置参数，让用户免配置就可以使用此插件，也能防止用户配置错误导致功能不正常</li>
+  <li>完成基础单行补全、多行补全以及数据收集功能</li>
 </ul>
-
-<p>Our code completion is now faster and more responsive with improved indentation, multiline code completion and chat responsiveness.</p>
-
-<p>In the Pro version, you can enjoy all of those AI features,
-integrated into a single package that follows your privacy settings.</p>
-
-<p>Check out our Trial version, ready to start working for you in seconds!</p>
 ]]></change-notes>
 
 

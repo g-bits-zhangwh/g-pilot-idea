@@ -24,7 +24,7 @@ dependencies {
 
 
 group = "com.zhangwh"
-version = "0.1.0"
+//version = "0.1.0"
 //version = getVersionString("1.4.1")
 
 repositories {
@@ -58,7 +58,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("231")
-        untilBuild.set("242.*")
+        untilBuild.set("")
     }
 
     signPlugin {
