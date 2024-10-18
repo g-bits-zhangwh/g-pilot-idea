@@ -5,9 +5,106 @@
     <name>G-pilot</name>
     <vendor >zhangwh
     </vendor>
-    <version>0.1.0</version>
+    <version>0.1.7</version>
 
     <description><![CDATA[
+<h1>G-pilot IDEA Extension Plugin</h1>
+
+<h2>Introduction</h2>
+<p>G-pilot is a code completion tool developed by the Technology Center, designed to provide a private deployment within the company, particularly optimized for languages such as GS, C#, and Lua.</p>
+<p>Currently, G-pilot has developed IDE plugins for VSCode, VS2022, and JetBrains series (IDEA, PyCharm, CLion). Users can choose based on their needs.</p>
+<ul>
+    <li><strong>G-pilot Model Training</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot">G-pilot GitLab</a></li>
+    <li><strong>G-pilot VSCode Plugin</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vscode">G-pilot VSCode Plugin</a></li>
+    <li><strong>G-pilot VSCode Plugin Backend</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot-lsp">G-pilot LSP</a></li>
+    <li><strong>G-pilot VS Extension Plugin</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vs">G-pilot VS Plugin</a></li>
+    <li><strong>G-pilot JetBrains Series Extension Plugin</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot-idea">G-pilot IDEA Plugin</a></li>
+    <li><strong>G-pilot VS and JetBrains Series Backend</strong>: <a href="https://m68gitlab.g-bits.com/aigc/g-pilot-vs-lsp">G-pilot VS LSP</a></li>
+</ul>
+
+<h2>Feishu User Communication Group</h2>
+<p>G-pilot is continuously being iterated and optimized. We invite you to click the <a href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=d44u4681-12a4-4ccc-8ae8-a8bd8d563695">Feishu user group link</a> to join the group and provide us with valuable suggestions for modifications and optimizations. You can also communicate and exchange ideas directly in the group for any issues encountered while using the plugin. Notifications for new version releases will also be shared in the group.</p>
+
+<h2>Features</h2>
+<p>Currently, G-pilot supports single-line code completion, multi-line code completion, and comment generation features. Additional AI features will be developed based on user demand.</p>
+
+<h2>Installation Method</h2>
+<p><strong>Note</strong>: Before using the G-pilot plugin, other code completion plugins such as Copilot, Comate, Marscode, TabNine, etc., must be disabled to avoid conflicts in code completion functionality.</p>
+<ol>
+    <li>Search for <strong>G-pilot</strong> in the VS extension marketplace and click install.</li>
+    <li>After successful installation, <strong>close VS</strong>. A VSIX installation window will pop up. Click <strong>Modify</strong> as shown below:</li>
+</ol>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VSIX%E5%AE%89%E8%A3%85%E7%95%8C%E9%9D%A2.jpg" alt="VSIX Installation Interface" />
+<ol start="3">
+    <li>After waiting for several seconds, the following interface will indicate a successful installation. Reopen VS to use the G-pilot plugin.</li>
+</ol>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E7%95%8C%E9%9D%A2.jpg" alt="VS Plugin Installation Completion Interface" />
+
+<h2>Usage Instructions</h2>
+<h3>1. Single-Line Code Completion</h3>
+
+<h4>Trigger Methods</h4>
+<ol>
+    <li>Code changes will automatically trigger completion prompts.</li>
+    <li>Press the combination <strong>Shift + Ctrl + Space</strong> to manually trigger a single-line code completion prompt.</li>
+</ol>
+
+<h4>Completion Display</h4>
+<p>Upon successful triggering of completion, the result will be displayed in gray text after the cursor, as shown below:</p>
+<img src="https://github.com/zhangwenhao66/g-pilot-vscode-img/blob/main/img/%E8%A1%A5%E5%85%A8%E6%98%BE%E7%A4%BA.jpg?raw=true" alt="Completion Display" />
+
+<h4>Accepting Completion</h4>
+<p>Press the <strong>Tab</strong> key to accept the complete completion.</p>
+
+<h4>Closing Completion Display</h4>
+<p>Press the <strong>Esc</strong> key to close the current completion result display.</p>
+
+<h3>2. Multi-Line Code Completion</h3>
+
+<h4>Trigger Method</h4>
+<p>Press the combination <strong>Shift + Ctrl + Enter</strong> to manually trigger a multi-line code completion prompt.</p>
+<img src="https://github.com/zhangwenhao66/g-pilot-vscode-img/blob/main/img/%E5%A4%9A%E8%A1%8C%E8%A1%A5%E5%85%A8%E6%98%BE%E7%A4%BA.jpg?raw=true" alt="Multi-Line Completion Display" />
+
+<h4>Completion Display, Acceptance, and Closing</h4>
+<p>These are consistent with the single-line code completion functionality.</p>
+
+<h3>3. Comment Generation Code Feature</h3>
+
+<h4>Trigger Method</h4>
+<p>Similarly, at a comment line or the line after a comment, press the combination <strong>Shift + Ctrl + Enter</strong> to trigger comment generation code prompts.</p>
+
+<h4>Completion Display, Acceptance, and Closing</h4>
+<p>These are consistent with the single-line code completion functionality.</p>
+
+<h3>4. Important Parameter Settings</h3>
+
+<p>In the IDEA menu bar, select <strong>File</strong>, then click <strong>Settings</strong> to open the settings interface. Expand the <strong>Tools</strong> option in the left sidebar, find <strong>G-pilot</strong>, and select it to display the relevant parameter settings, as shown below:</p>
+<img src="https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.jpg" alt="VS Parameter Settings Interface" />
+
+<h4>Important Parameters</h4>
+<ul>
+    <li><strong>Code Completion Recommendation Display Threshold</strong>
+        <ul>
+            <li><strong>Default Value</strong>: 3</li>
+            <li><strong>Range</strong>: 0 to positive infinity</li>
+            <li><strong>Description</strong>: A smaller value indicates stricter judgment, resulting in fewer displayed completion recommendations but higher quality.</li>
+            <li><strong>Special Values</strong>: 0 means no completion recommendations will be displayed. An empty value represents positive infinity, showing all completion recommendations.</li>
+        </ul>
+    </li>
+    <li><strong>Consent for Code Data Collection</strong>
+        <ul>
+            <li><strong>Default</strong>: Checked</li>
+            <li><strong>Description</strong>: If checked, data will be sent to the backend for recording every time a completion recommendation is accepted (the sent data does not include user information and is anonymous). This data will be used for the ongoing iteration and upgrade of the G-pilot model.</li>
+        </ul>
+    </li>
+    <li><strong>Automatically Jump to End of Line After Accepting Completion</strong>
+        <ul>
+            <li><strong>Default</strong>: Checked</li>
+            <li><strong>Description</strong>: If checked, the cursor will automatically jump to the end of the line after accepting a completion recommendation.</li>
+        </ul>
+    </li>
+</ul>
+
 <h1>G-pilot IDEA扩展插件</h1>
 
 <h2>简介</h2>
@@ -106,6 +203,17 @@
 ]]></description>
 
     <change-notes><![CDATA[
+<h1>Changelog</h1>
+
+<h2>2024-10-15 v0.1.0</h2>
+
+<ul>
+  <li>Developed based on the open-source project <a href="https://github.com/smallcloudai/refact-intellij">https://github.com/smallcloudai/refact-intellij</a></li>
+  <li>Changed the project icon and identifier to G-pilot</li>
+  <li>Fixed some configuration parameters to allow users to use the plugin without configuration, preventing issues caused by incorrect user settings</li>
+  <li>Completed the basic features of single-line completion, multi-line completion, and data collection functionality</li>
+</ul>
+
 <h1>更改日志</h1>
 
 <h2>2024-10-15 v0.1.0</h2>
