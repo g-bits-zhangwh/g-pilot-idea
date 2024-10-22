@@ -319,7 +319,7 @@ class LSPProcessHolder(val project: Project) : Disposable {
         val BIN_PATH = Path(
             getTempDirectory(),
             ApplicationInfo.getInstance().build.toString().replace(Regex("[^A-Za-z0-9 ]"), "_") +
-                "_g_pilot_${InferenceGlobalContext.ide}_lsp${getExeSuffix()}"
+                "_g_pilot_idea_lsp${getExeSuffix()}"
         ).toString()
 
         // here ?
