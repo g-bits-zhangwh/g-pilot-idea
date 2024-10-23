@@ -30,7 +30,8 @@ import java.util.concurrent.TimeUnit
 import kotlin.io.path.Path
 import com.smallcloud.refactai.account.AccountManager.Companion.instance as AccountManager
 import com.smallcloud.refactai.io.InferenceGlobalContext.Companion.instance as InferenceGlobalContext
-
+import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.openapi.extensions.PluginId
 
 private fun getExeSuffix(): String {
     if (SystemInfo.isWindows) return ".exe"
@@ -316,11 +317,17 @@ class LSPProcessHolder(val project: Project) : Disposable {
     }
 
     companion object {
-        val BIN_PATH = Path(
-            getTempDirectory(),
-            ApplicationInfo.getInstance().build.toString().replace(Regex("[^A-Za-z0-9 ]"), "_") +
-                "_g_pilot_idea_lsp${getExeSuffix()}"
-        ).toString()
+        val BIN_PATH: String by lazy {
+            val plugin = PluginManagerCore.getPlugin(PluginId.getId("com.zhangwh.g_pilot_idea"))
+            val pluginPath = plugin?.pluginPath?.toAbsolutePath()?.toString()
+
+            if (pluginPath != null) {
+                // Path to g_pilot_idea_lsp.exe inside the plugin folder
+                Path(pluginPath, "bin/g_pilot_idea_lsp.exe").toString()
+            } else {
+                throw IllegalStateException("Plugin path not found!")
+            }
+        }
 
         // here ?
         @JvmStatic

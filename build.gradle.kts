@@ -1,3 +1,7 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+import org.gradle.api.tasks.Copy
+
 plugins {
     id("java")
     id("org.jetbrains.intellij") version "1.16.0"
@@ -74,6 +78,33 @@ tasks {
 
     test  {
         useJUnitPlatform()
+    }
+
+    register<Copy>("copyExecutable") {
+        val targetFile = Paths.get("$buildDir/distributions/bin/g_pilot_idea_lsp.exe")
+
+        // Before copying, check if the target file is locked or in use
+        doFirst {
+            if (Files.exists(targetFile)) {
+                try {
+                    // Try to delete the file to see if it's locked
+                    Files.delete(targetFile)
+                } catch (e: Exception) {
+                    // File is locked or cannot be deleted, log a warning and skip the copy
+                    logger.warn("The file $targetFile is in use and cannot be overwritten.")
+                    throw StopExecutionException("Skipping copy since the file is in use.")
+                }
+            }
+        }
+
+        // Perform the actual copy if the file is not locked
+        from("src/main/resources/bin/g_pilot_idea_lsp.exe")
+        into("$buildDir/distributions/bin")
+    }
+
+    // Make sure the copyExecutable task runs before building the plugin
+    named("buildPlugin") {
+        dependsOn("copyExecutable")
     }
 }
 
