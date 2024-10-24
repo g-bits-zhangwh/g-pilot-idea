@@ -38,10 +38,16 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var multilineInferenceUri: String? = "http://aitools.g-bits.com:8011/"
     var extensionId: String = "com.zhangwh.g_pilot_idea"
     var username: String? = null
-    var ide: String = if (System.getProperty("idea.platform.prefix") == "Idea") {
-        "idea"
-    } else {
-        "pycharm"
+    val platformPrefix = System.getProperty("idea.platform.prefix") ?: ""
+    var ide: String = when {
+        platformPrefix.contains("Idea", ignoreCase = true) -> "idea"
+        platformPrefix.contains("PyCharm", ignoreCase = true) -> "pycharm"
+        platformPrefix.contains("WebStorm", ignoreCase = true) -> "webstorm"
+        platformPrefix.contains("PhpStorm", ignoreCase = true) -> "phpstorm"
+        platformPrefix.contains("Ruby", ignoreCase = true) -> "rubymine"
+        platformPrefix.contains("CLion", ignoreCase = true) -> "clion"
+        platformPrefix.contains("GoLand", ignoreCase = true) -> "goland"
+        else -> "unknown"
     }
     var loginMessage: String? = null
     var tooltipMessage: String? = null
