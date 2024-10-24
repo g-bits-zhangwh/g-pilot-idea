@@ -23,10 +23,8 @@ G-pilot VS、jetbrains系列（IDEA、pycharm、Clion）扩展插件后端：[ht
 ## 安装方式
 
 **（注意使用G-pilot插件前，需要将其他代码补全插件如Copilot、Comate、Marscode、TabNine等禁用，避免代码补全的功能发生冲突）**  
-在VS的拓展商城搜索：**G-pilot**，点击安装成功后，**关闭VS**，随后会弹出一个VSIX安装窗口，然后点击**Modify**如下图所示：  
-![Image text](https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VSIX%E5%AE%89%E8%A3%85%E7%95%8C%E9%9D%A2.jpg)  
-在等待十几秒后，出现下面界面则表示安装成功，再次打开VS即可正常使用G-pilot插件了。  
-![Image text](https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E7%95%8C%E9%9D%A2.jpg)
+在IDEA菜单栏中选择**文件**，再点击**设置**打开设置界面，在左边栏中点击**插件**，然后选择**Marketplace**，在下方搜索：**G-pilot**，然后点击安装成功后，重启IDEA即可：  
+![Image text](https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/idea%E5%AE%89%E8%A3%85%E7%95%8C%E9%9D%A2.jpg)  
 
 ## 使用方法
 
@@ -76,7 +74,7 @@ G-pilot VS、jetbrains系列（IDEA、pycharm、Clion）扩展插件后端：[ht
 
 在IDEA菜单栏中选择**文件**，再点击**设置**打开设置界面，在左边栏点击展开**工具**选项，找到**G-pilot**，选择后则会显示出G-pilot相关的参数设置，如下图所示
 
-![Image text](https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/VS%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.jpg)
+![Image text](https://raw.githubusercontent.com/zhangwenhao66/g-pilot-vscode-img/refs/heads/main/img/idea%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.jpg)
 
 其中比较重要的参数如下：
 

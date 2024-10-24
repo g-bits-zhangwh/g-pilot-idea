@@ -34,8 +34,8 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var streamlinedLoginTicket: String? = null
     var streamlinedLoginTicketWasCreatedTs: Long? = null
     var inferenceUri: String? = null
-    var userInferenceUri: String? = "http://172.20.158.92:8010/"
-    var multilineInferenceUri: String? = "http://172.20.158.92:8011/"
+    var userInferenceUri: String? = "http://aitools.g-bits.com:8010/"
+    var multilineInferenceUri: String? = "http://aitools.g-bits.com:8011/"
     var extensionId: String = "com.zhangwh.g_pilot_idea"
     var username: String? = null
     var ide: String = if (System.getProperty("idea.platform.prefix") == "Idea") {
