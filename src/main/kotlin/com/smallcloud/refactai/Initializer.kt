@@ -8,7 +8,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupActivity
 import com.smallcloud.refactai.listeners.UninstallListener
 import com.smallcloud.refactai.notifications.notificationStartup
-import com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeAction
+//import com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeAction
 import com.smallcloud.refactai.privacy.PrivacyService
 import com.smallcloud.refactai.settings.AppSettingsState
 import com.smallcloud.refactai.settings.settingsStartup

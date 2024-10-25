@@ -23,7 +23,7 @@ import com.smallcloud.refactai.RefactAIBundle
 import com.smallcloud.refactai.Resources
 import com.smallcloud.refactai.Resources.refactAIAdvancedSettingsID
 import com.smallcloud.refactai.Resources.refactAIRootSettingsID
-import com.smallcloud.refactai.panes.RefactAIToolboxPaneFactory
+//import com.smallcloud.refactai.panes.RefactAIToolboxPaneFactory
 import com.smallcloud.refactai.privacy.Privacy
 import com.smallcloud.refactai.privacy.PrivacyChangesNotifier
 import com.smallcloud.refactai.settings.AppSettingsState.Companion.acceptedCompletionCounter
@@ -177,9 +177,9 @@ fun emitRegular(project: Project, editor: Editor) {
     if (chat != null && getLSPProcessHolder(project).getCaps().codeChatModels.isNotEmpty()) {
         val chatShortcut = KeymapUtil.getShortcutText("ActivateRefactChatToolWindow")
         notification.addAction(NotificationAction.createSimple("Chat ($chatShortcut)") {
-            chat.activate {
-                RefactAIToolboxPaneFactory.chat?.requestFocus()
-            }
+//            chat.activate {
+//                RefactAIToolboxPaneFactory.chat?.requestFocus()
+//            }
             notification.expire()
         })
     }

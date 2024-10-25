@@ -24,7 +24,7 @@ import org.cef.network.CefCookie
 import org.cef.network.CefRequest
 import org.cef.network.CefResponse
 import org.cef.network.CefURLRequest
-import org.cef.security.CefSSLInfo
+//import org.cef.security.CefSSLInfo
 import javax.swing.JComponent
 import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.colors.EditorColorsScheme

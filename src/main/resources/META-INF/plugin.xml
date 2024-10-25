@@ -5,7 +5,7 @@
     <name>G-pilot</name>
     <vendor >zhangwh
     </vendor>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 
     <description><![CDATA[
 <h1>G-pilot IDEA Extension Plugin</h1>
@@ -205,6 +205,12 @@
   <li>Completed the basic features of single-line completion, multi-line completion, and data collection functionality</li>
 </ul>
 
+<h2>2024-10-24 v0.2.1</h2>
+
+<ul>
+  <li>Resolve the compatibility issues between 2023.1 and 2022.3 versions, making the plugin compatible with 2023.1 and 2022.3 versions of IDE</li>
+</ul>
+
 <h1>更改日志</h1>
 
 <h2>2024-10-24 v0.2.0</h2>
@@ -214,6 +220,12 @@
   <li>更改项目图标和标识为G-pilot</li>
   <li>固定一些配置参数，让用户免配置就可以使用此插件，也能防止用户配置错误导致功能不正常</li>
   <li>完成基础单行补全、多行补全以及数据收集功能</li>
+</ul>
+
+<h2>2024-10-24 v0.2.1</h2>
+
+<ul>
+  <li>解决2023.1和2022.3版本的兼容性问题，使插件可以兼容2023.1和2022.3版本的IDE</li>
 </ul>
 ]]></change-notes>
 
@@ -243,14 +255,14 @@
                                  instance="com.smallcloud.refactai.settings.AppSettingsConfigurable"
                                  id="gpilot_advanced_settings"
                                  displayName="G-pilot"/>
-        <errorHandler implementation="com.smallcloud.refactai.PluginErrorReportSubmitter"/>
+<!--        <errorHandler implementation="com.smallcloud.refactai.PluginErrorReportSubmitter"/>-->
 
         <actionPromoter implementation="com.smallcloud.refactai.listeners.InlineActionsPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.AcceptActionsPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.CancelActionsPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.ForceCompletionActionPromoter"/>
         <actionPromoter implementation="com.smallcloud.refactai.listeners.ForceMultiCompletionActionPromoter"/>
-        <actionPromoter implementation="com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeActionPromoter"/>
+<!--        <actionPromoter implementation="com.smallcloud.refactai.panes.sharedchat.ChatPaneInvokeActionPromoter"/>-->
 
 <!--        <toolWindow id="Refact" anchor="right"-->
 <!--                    canCloseContents="true"-->

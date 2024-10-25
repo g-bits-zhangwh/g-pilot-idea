@@ -47,6 +47,7 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
         platformPrefix.contains("Ruby", ignoreCase = true) -> "rubymine"
         platformPrefix.contains("CLion", ignoreCase = true) -> "clion"
         platformPrefix.contains("GoLand", ignoreCase = true) -> "goland"
+        platformPrefix.contains("Rider", ignoreCase = true) -> "rider"
         else -> "unknown"
     }
     var loginMessage: String? = null
