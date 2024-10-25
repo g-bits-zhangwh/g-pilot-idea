@@ -84,6 +84,7 @@ class CompletionState(
         }
         return Completion(
             originalText = requestedText,
+            prompt = "",
             completion = editedCompletion,
 //            currentLinesAreEqual = false,
             multiline = currentMultiline,

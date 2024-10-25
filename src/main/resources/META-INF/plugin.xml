@@ -5,7 +5,7 @@
     <name>G-pilot</name>
     <vendor >zhangwh
     </vendor>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 
     <description><![CDATA[
 <h1>G-pilot IDEA Extension Plugin</h1>
@@ -211,6 +211,12 @@
   <li>Resolve the compatibility issues between 2023.1 and 2022.3 versions, making the plugin compatible with 2023.1 and 2022.3 versions of IDE</li>
 </ul>
 
+<h2>2024-10-25 v0.2.2</h2>
+
+<ul>
+  <li>Fixed the problem of missing fim identifier when user adopts completed data</li>
+</ul>
+
 <h1>更改日志</h1>
 
 <h2>2024-10-24 v0.2.0</h2>
@@ -226,6 +232,12 @@
 
 <ul>
   <li>解决2023.1和2022.3版本的兼容性问题，使插件可以兼容2023.1和2022.3版本的IDE</li>
+</ul>
+
+<h2>2024-10-25 v0.2.2</h2>
+
+<ul>
+  <li>修复用户采纳补全的数据丢失fim标识符问题</li>
 </ul>
 ]]></change-notes>
 

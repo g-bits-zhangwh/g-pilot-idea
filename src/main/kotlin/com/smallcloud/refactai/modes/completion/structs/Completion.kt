@@ -3,6 +3,7 @@ package com.smallcloud.refactai.modes.completion.structs
 
 data class Completion(
     val originalText: String,
+    val prompt: String,
     var completion: String = "",
     val multiline: Boolean,
     val offset: Int,

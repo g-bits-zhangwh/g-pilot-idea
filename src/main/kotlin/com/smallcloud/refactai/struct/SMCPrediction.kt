@@ -14,6 +14,7 @@ data class SMCStreamingPeace(
     @SerializedName("multi_line") val multiLine: Boolean,
     @SerializedName("complete_include_char_num") val completeIncludeCharNum: Int,
     @SerializedName("complete_data_collect") val completeDataCollect: Boolean,
+    @SerializedName("request_prompt") val requestPrompt: String,
 )
 
 

@@ -263,7 +263,8 @@ class CompletionMode(
 
             val completion: Completion = if (completionLayout?.lastCompletionData == null ||
                 completionLayout?.lastCompletionData?.createdTs != prediction.created) {
-                Completion(request.body.inputs.sources.values.toList().first(),
+                val completion = Completion(request.body.inputs.sources.values.toList().first(),
+                    prompt = prediction.requestPrompt,
                     offset = editorState.offset,
                     multiline = false,
                     createdTs = prediction.created,
@@ -273,6 +274,7 @@ class CompletionMode(
                     completeIncludeCharNum = prediction.completeIncludeCharNum,
                     completeDataCollect = prediction.completeDataCollect,
                 )
+                completion
             } else {
                 completionLayout!!.lastCompletionData!!
             }
@@ -330,7 +332,7 @@ class CompletionMode(
         val params = completionLayout?.lastCompletionData?.let {
             AcceptData(
                 requestPrompt = if (InferenceGlobalContext.agreeCodeCollect && it.completeDataCollect) {
-                    it.originalText
+                    it.prompt
                 } else {
                     ""
                 },

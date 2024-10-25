@@ -48,7 +48,7 @@ class AppSettingsState : PersistentStateComponent<AppSettingsState> {
         platformPrefix.contains("CLion", ignoreCase = true) -> "clion"
         platformPrefix.contains("GoLand", ignoreCase = true) -> "goland"
         platformPrefix.contains("Rider", ignoreCase = true) -> "rider"
-        else -> "unknown"
+        else -> "jetbrains_unknown"
     }
     var loginMessage: String? = null
     var tooltipMessage: String? = null
